@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
 private
   def basic_auth
-    if ['staging', 'demo'].include? Rails.env
+    if ['production'].include? Rails.env
       authenticate_or_request_with_http_basic do |username, password|
         username == "labofill" && password == "stock"
       end
