@@ -1,0 +1,47 @@
+.row
+  .col-md-6
+    %h3= "Détail produit"
+    = form_tag product_path(@product.id), data: {component: 'Products', do: 'update', on: 'submit'} do
+      .modal-body
+        .form-group
+          %label.form-label
+            = "Référence"
+            %em= '*'
+            %span.error{'data-product-errors' => 'reference'}
+          = text_field_tag 'product[reference]', @product.reference, class: 'form-control'
+
+        .form-group
+          %label.form-label
+            = "Nom"
+            %em= '*'
+            %span.error{'data-product-errors' => 'name'}
+          = text_field_tag 'product[name]', @product.name, class: 'form-control'
+
+        .form-group
+          %label.form-label
+            = "Quantité"
+            %em= '*'
+            %span.error{'data-product-errors' => 'quantity'}
+          = text_field_tag 'product[quantity]', @product.quantity, class: 'form-control'
+
+        .form-group
+          %label.form-label
+            = "Emplacement"
+            %em= '*'
+            %span.error{'data-product-errors' => 'position'}
+          = text_field_tag 'product[position]', @product.position, class: 'form-control', disabled: true
+
+        .form-group
+          %label.form-label
+            = "Notes"
+          = text_area_tag 'product[notes]', @product.notes, class: 'form-control'
+
+        .form-group
+          = submit_tag "Enregistrer", class: 'btn btn-primary pull-right'
+          %a{href: '#', class: 'btn btn-primary pull-right', data: {toggle: "modal", target: "#removeProduct"}}= "Sortir"
+          %a{href: '#', class: 'btn btn-danger pull-right'}= "Supprimer"
+
+  .col-md-6.history
+    %h3= "Historique"
+
+= render partial: '/modals/remove'

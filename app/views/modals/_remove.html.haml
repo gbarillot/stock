@@ -1,40 +1,28 @@
-#createProduct.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+#removeProduct.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
   .modal-dialog{:role => "document"}
     .modal-content
       .modal-header
         %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
           %span{"aria-hidden" => "true"} ×
-        %h4#myModalLabel.modal-title.w-100= "Ajouter un produit"
+        %h4#myModalLabel.modal-title.w-100= "Sortir un produit"
       = form_tag products_path, data: {component: 'Products', do: 'create', on: 'submit'} do
         .modal-body
+          %h3= @product.name
+          %p= "Réf: #{@product.reference}"
+          %br
           %form-group
             %label.form-label
-              = "Référence"
+              = "Quantité à sortir"
               %em= '*'
               %span.error{'data-product-errors' => 'reference'}
             = text_field_tag 'product[reference]', nil, class: 'form-control'
 
           %form-group
             %label.form-label
-              = "Nom"
+              = "Commande"
               %em= '*'
               %span.error{'data-product-errors' => 'name'}
             = text_field_tag 'product[name]', nil, class: 'form-control'
-
-          %form-group
-            %label.form-label
-              = "Quantité"
-              %em= '*'
-              %span.error{'data-product-errors' => 'quantity'}
-            = text_field_tag 'product[quantity]', nil, class: 'form-control'
-
-          %form-group
-            %label.form-label
-              = "Emplacement"
-              %em= '*'
-              %span.error{'data-product-errors' => 'position'}
-            = text_field_tag 'product[position]', nil, class: 'form-control'
-
 
         .modal-footer
           = submit_tag "Enregistrer", class: 'btn btn-primary pull-right'

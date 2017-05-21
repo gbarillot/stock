@@ -3,7 +3,7 @@
   <head>
     <title>Cedric</title>
     <%= csrf_meta_tags %>
-
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -11,7 +11,7 @@
     <nav class="navbar navbar-light bg-primary">
       <a type='button', class='pull-right btn-floating btn-large btn-add waves-effect waves-light' data-toggle="modal" data-target="#createProduct"><i>+</i></a>
       <form class="form-inline pull-xs-right">
-          <input class="form-control" type="text" placeholder="Rechercher un produit ou un #emplacement..." class='col-md-12'>
+          <input id='search' class="form-control" type="text" placeholder="Rechercher un produit ou un #emplacement..." class='col-md-12'>
       </form>
     </nav>
 
@@ -22,6 +22,6 @@
 
     </div>
     <%= render partial: '/modals/create' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
   </body>
 </html>

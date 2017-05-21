@@ -39,4 +39,25 @@ form {
   em {
     color: red;
   }
+  span.error {
+    display: block;
+    color: red;
+  }
+  textarea {
+    border-radius: 0 !important;
+  }
+}
+.card {
+  padding: 20px;
+  margin-bottom: 20px;
+  h4.card-title {
+    color: #000 !important;
+  }
+}
+ul.breadcrumb li:first-child {
+  float: right;
+}
+.history {
+  border-left: 1px solid #ddd;
+  height: 600px;
 }
