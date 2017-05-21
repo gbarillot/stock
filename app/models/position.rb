@@ -1,0 +1,4 @@
+class Position < ApplicationRecord
+
+
+end

@@ -1,0 +1,33 @@
+#createProduct.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4#myModalLabel.modal-title.w-100= "Ajouter un produit"
+      .modal-body
+        = form_tag products_path do
+          %form-group
+            %label.form-label
+              = "Référence"
+              %em= '*'
+            = text_field_tag 'product[name]', nil, class: 'form-control'
+          %form-group
+            %label.form-label
+              = "Nom"
+              %em= '*'
+            = text_field_tag 'product[name]', nil, class: 'form-control'
+          %form-group
+            %label.form-label
+              = "Quantité"
+              %em= '*'
+            = text_field_tag 'product[name]', nil, class: 'form-control'
+          %form-group
+            %label.form-label
+              = "Emplacement"
+              %em= '*'
+            = text_field_tag 'product[name]', nil, class: 'form-control'
+
+      .modal-footer
+        %button.btn.btn-primary.pull-right{:type => "button"}= "Enregistrer"
+        %button.btn.btn-secondary.pull-right{:type => "button", "data-dismiss" => "modal"}= "Fermer"

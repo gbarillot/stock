@@ -1,0 +1,42 @@
+.navbar {
+  a.btn-add {
+    background-color: red;
+    i {
+      font-style: normal !important;
+      font-size: 30px;
+    }
+  }
+  ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+      color:    #fff !important;
+      opacity:  0.7;
+  }
+  :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+     color:    #fff !important;
+     opacity:  1;
+  }
+  ::-moz-placeholder { /* Mozilla Firefox 19+ */
+     color:    #fff !important;
+     opacity:  1;
+  }
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+     color:    #fff !important;
+  }
+  ::-ms-input-placeholder { /* Microsoft Edge */
+     color:    #fff !important;
+  }
+  form {
+    padding-top: 10px;
+    padding-left: 10px;
+    width: 70%;
+    input {
+      border-color: #ccc;
+      color: #fff;
+      width: 100% !important;
+    }
+  }
+}
+form {
+  em {
+    color: red;
+  }
+}
