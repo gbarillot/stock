@@ -2,13 +2,14 @@
   %ul.breadcrumb
     %li{data: {component: 'Positions', is: 'total'}}= ""
     - path = []
+    - labels = ["Allée", "Rack", "Etage", "Emplacement"]
     - max = params[:id].split('-').length - 1
     - params[:id].split('-').each_with_index do |p, i|
       - path.push(p)
       %li
         - if max == i
-          = p
+          = "#{labels[i]} #{p}"
         - else
-          = link_to p, position_path("#{path.join('-')}")
+          = link_to "#{labels[i]} #{p}", position_path("#{path.join('-')}")
 
 .row#positions{data: {component: 'Positions', is: "#{params[:id]}"}}
