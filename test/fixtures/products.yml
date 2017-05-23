@@ -1,0 +1,9 @@
+product_1:
+  name: "first product"
+  reference: 123456
+  quantity: 12
+
+product_2:
+  name: "second product"
+  reference: 6789
+  quantity: 10
