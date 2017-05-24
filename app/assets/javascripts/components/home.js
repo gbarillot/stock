@@ -5,7 +5,7 @@ const Home = Vue.component('Home', {
       <div class='main-wrapper'>
         <div class='container-fluid'>
           <div class='row'>
-            <div class='col-md-4' v-for='product in products'><Product></Product></div>
+            <div class='col-md-4' v-for='product in products'><Product :product='product'></Product></div>
           </div>
         </div>
       </div>
@@ -13,11 +13,16 @@ const Home = Vue.component('Home', {
     </div>`,
 
   data: function(){
-    return {
-      products: [
-        { name: 'Foo' },
-        { name: 'Bar' }
-      ]
-    }
+    return store.state
+  },
+
+  mounted: function () {
+    $.ajax({
+       url: '/products',
+       type: 'get',
+       success: function (data) {
+         store.state.products = data.products;
+       }
+    });
   }
 })

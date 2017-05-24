@@ -13,4 +13,11 @@
 //= require rails-ujs
 //= require_tree ./vendor
 //= require_tree ./components
-//= require_tree .
+//= require store
+//= require xhr_setup
+//= require routes
+
+const app = new Vue({
+  store,
+  router
+}).$mount('#app')
