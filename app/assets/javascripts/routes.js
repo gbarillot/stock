@@ -1,6 +1,6 @@
 const routes = [
   { path: '/', component: Home },
-  { path: '/products', component: Products }
+  { path: '/positions', component: Positions }
 ]
 
 const router = new VueRouter({

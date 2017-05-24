@@ -1,1 +1,5 @@
-const Products = { template: '<div>products</div>' }
+const Positions = Vue.component('Positions', {
+  template: `
+    <div>positions</div>
+  `
+})
