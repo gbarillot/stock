@@ -14,7 +14,6 @@ const Home = Vue.component('Home', {
 
   data: function(){
     return {
-      title: 'Home',
       products: [
         { name: 'Foo' },
         { name: 'Bar' }

@@ -1,7 +1,13 @@
 class ProductsController < ApplicationController
 
   def index
-    @products = Product.all.order('created_at DESC')
+    render json: {
+      success: true,
+      products: [
+        {name: "First product", reference: "1234"},
+        {name: "Second product", reference: "5678"}
+      ]
+    }.to_json
   end
 
   def show
