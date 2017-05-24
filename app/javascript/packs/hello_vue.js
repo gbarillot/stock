@@ -1,19 +1,23 @@
-/* eslint no-console: 0 */
-// Run this example by adding <%= javascript_pack_tag 'hello_vue' %>
-// to the head of your layout file,
-// like app/views/layouts/application.html.erb.
-// All it does is render <div>Hello Vue</div> at the bottom of the page.
-
 import Vue from 'vue/dist/vue.esm'
-import App from './app.vue'
+import VueRouter from 'vue-router'
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.body.appendChild(document.createElement('hello'))
-  const app = new Vue({
-    el: 'hello',
-    template: '<App/>',
-    components: { App }
-  })
+const Home = { template: '<div>Homepage</div>' }
+const Foo = { template: '<div>foo</div>' }
+const Bar = { template: '<div>bar</div>' }
 
-  console.log(app)
+
+const routes = [
+  { path: '/aa', component: Home },
+  { path: '/foo', component: Foo },
+  { path: '/bar', component: Bar }
+]
+
+
+const router = new VueRouter({
+  routes
 })
+
+s
+const app = new Vue({
+  router
+}).$mount('#app')

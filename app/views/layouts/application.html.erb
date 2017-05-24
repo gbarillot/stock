@@ -3,26 +3,18 @@
   <head>
     <title>Cedric</title>
     <%= csrf_meta_tags %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+
+    <%= stylesheet_link_tag  'application', media: 'all' %>
   </head>
 
   <body>
-    <%= javascript_pack_tag 'hello_vue' %>
-    <nav class="navbar navbar-light bg-primary">
-      <a type='button', class='pull-right btn-floating btn-large btn-add waves-effect waves-light' data-toggle="modal" data-target="#createProduct"><i>+</i></a>
-      <form class="form-inline pull-xs-right">
-          <input id='search' class="form-control" type="text" placeholder="Rechercher un produit ou un #emplacement..." class='col-md-12'>
-      </form>
-    </nav>
-
-    <div class='main-wrapper'>
-      <div class='container-fluid'>
-        <%= yield %>
-      </div>
-
+    <div id='app'>
+      <router-view></router-view>
     </div>
-    <%= render partial: '/modals/create' %>
 
+    <%= javascript_include_tag 'application' %>
   </body>
 </html>

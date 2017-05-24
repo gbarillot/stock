@@ -12,6 +12,5 @@
 //
 //= require rails-ujs
 //= require_tree ./vendor
-//= require turbolinks
-//= require_tree .
 //= require_tree ./components
+//= require_tree .
