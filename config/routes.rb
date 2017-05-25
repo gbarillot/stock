@@ -4,5 +4,7 @@ Rails.application.routes.draw do
 
   get 'products/autocomplete', to: 'products#autocomplete'
   resources :products
+
+  get 'positions/autocomplete', to: 'positions#autocomplete'
   resources :positions
 end

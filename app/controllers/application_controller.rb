@@ -4,9 +4,11 @@ class ApplicationController < ActionController::Base
 
 private
   def basic_auth
-    if ['production'].include? Rails.env
-      authenticate_or_request_with_http_basic do |username, password|
-        username == "labofill" && password == "stock"
+    authenticate_or_request_with_http_basic do |username, password|
+      if username == "labofill" && password == "guillaume"
+        session[:current_user] = "guillaume"
+      elsif username == "labofill" && password == "cédric"
+        session[:current_user] = "guillaume"
       end
     end
   end

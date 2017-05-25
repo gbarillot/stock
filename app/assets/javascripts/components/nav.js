@@ -1,10 +1,36 @@
 const Nav = Vue.component('Nav', {
   template: `
     <nav class="navbar navbar-light bg-primary">
-      <a type="button" class="pull-right btn-floating btn-large btn-add waves-effect waves-light" data-toggle="modal" data-target="#createProduct"><i>+</i></a>
-      <form class="form-inline pull-xs-right">
-          <input id='search' class="form-control col-md-12" type="text" placeholder="Rechercher un produit ou un #emplacement..." >
+      <a type="button" class="pull-right btn-floating btn-large btn-add" data-toggle="modal" data-target="#createProduct"><i>+</i></a>
+      <form class="form-inline pull-xs-right autocomplete">
+          <input
+           v-model="q"
+           v-on:keyup="search"
+
+           class="form-control col-md-12 col-sm-8"
+           type="text"
+           placeholder="Rechercher une référence ou un #emplacement..."
+          />
       </form>
+      <span class="metrics">{{metrics[0]}}/{{metrics[1]}}</span>
     </nav>
-  `
+  `,
+
+  data: function() {
+    return store.state
+  },
+
+  methods: {
+    search: function() {
+      that = this
+      delay(function(){
+        $.get('/positions/autocomplete', {q: that.q})
+          .done(function(data) {
+            store.state.metrics = [data.metrics.positions, data.metrics.count]
+            store.state.positions = data.positions
+          }
+        )
+      }, 300 )
+    }
+  }
 })

@@ -1,3 +1,10 @@
+svg {
+  width: 100%;
+  margin-left: 0px;
+}
+.btn-action {
+  background-color: #ccc
+}
 .navbar {
   a.btn-add {
     background-color: red;
@@ -33,6 +40,13 @@
       color: #fff;
       width: 100% !important;
     }
+  }
+  .metrics {
+    display: block;
+    height: 60px;
+    padding-top: 12px;
+    margin-left: 20px;
+    color: #ddd;
   }
 }
 form {

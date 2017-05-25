@@ -5,7 +5,7 @@ class Position < ApplicationRecord
   validates_presence_of :name, :depth, :quantity
   validates :quantity, numericality: { only_integer: true }
 
-  def self.search(q)
+  def self.autocomplete(q)
     if q.blank?
       out = Position.all.order('created_at DESC')
     else

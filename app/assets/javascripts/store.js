@@ -1,6 +1,8 @@
 const store = new Vuex.Store({
   state: {
     positions: [],
+    metrics: [0, 0],
+    q: '',
     new_position: {
       product_name: '',
       product_id: '',

@@ -10,6 +10,12 @@ class PositionsController < ApplicationController
     @position = Position.find(params[:id])
   end
 
+  def autocomplete
+    @positions = Position.autocomplete(params[:q])
+
+    render template: '/positions/index'
+  end
+
   def create
     @position = Position.link(position_params)
 
