@@ -121,3 +121,16 @@ ul.editor li a span {
   display: inline-block;
   width: 20px;
 }
+.modal-footer {
+  text-align: center !important;
+}
+.modal-footer input, .modal-footer button {
+  display: inline !important;
+  margin: 10px !important;
+  width: 140px !important;
+  @media (max-width: 320px) {
+    width: 100% !important;
+    margin: 10px 0 10px 0 !important;
+  }
+
+}

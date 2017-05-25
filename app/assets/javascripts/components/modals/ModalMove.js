@@ -35,8 +35,8 @@ const ModalMove = Vue.component('ModalMove', {
             </ul>
 
             <div class='modal-footer'>
-              <input type="submit" name="commit" value="Enregistrer" class="btn btn-primary pull-right" />
-              <button class='btn btn-secondary pull-right' data-dismiss='modal' type='button'>Fermer</button>
+              <input type="submit" name="commit" value="Enregistrer" class="btn btn-primary" />
+              <button class='btn btn-secondary' data-dismiss='modal' type='button'>Annuler</button>
             </div>
           </div>
         </div>
