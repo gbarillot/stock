@@ -3,7 +3,10 @@ svg {
   margin-left: 0px;
 }
 .btn-action {
-  background-color: #ccc
+  background-color: #eee;
+  &:hover {
+    color: #377ab7 !important;
+  }
 }
 .navbar {
   a.btn-add {
