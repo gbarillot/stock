@@ -1,21 +1,17 @@
 class ProductsController < ApplicationController
 
   def index
-    render json: {
-      success: true,
-      products: [
-        {name: "First product", reference: "1234"},
-        {name: "Second product", reference: "5678"}
-      ]
-    }.to_json
+    @products = Position.all.order('updated_at DESC')
+
+    render json: {products: @products}.to_json
   end
 
   def show
     @product = Product.find(params[:id])
   end
 
-  def search
-    @products = Product.search(params[:q])
+  def autocomplete
+    @products = Product.autocomplete(params[:q])
   end
 
   def update

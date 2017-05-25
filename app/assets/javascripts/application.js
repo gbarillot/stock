@@ -12,6 +12,7 @@
 //
 //= require rails-ujs
 //= require_tree ./vendor
+//= require helpers
 //= require_tree ./components
 //= require store
 //= require xhr_setup

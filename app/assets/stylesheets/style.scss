@@ -40,8 +40,11 @@ form {
     color: red;
   }
   span.error {
-    display: block;
+    display: inline;
     color: red;
+    &.hide {
+      display: none;
+    }
   }
   textarea {
     border-radius: 0 !important;
@@ -60,4 +63,24 @@ ul.breadcrumb li:first-child {
 .history {
   border-left: 1px solid #ddd;
   height: 600px;
+}
+.autocomplete {
+  ul {
+    position: absolute;
+    background-color: #fff;
+    width: 100%;
+    margin-left: -15px;
+    z-index: 10;
+    li {
+      padding: 5px 15px;
+      border-bottom: 1px solid #ddd;
+      strong{
+        display: block;
+      }
+      &:hover {
+        background-color: #ddd;
+        cursor: pointer;
+      }
+    }
+  }
 }

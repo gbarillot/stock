@@ -21,6 +21,7 @@ class Position < ApplicationRecord
   end
 
   def self.link(params)
+
     ActiveRecord::Base.transaction do
       new_position = Position.new(params)
 
@@ -38,9 +39,9 @@ class Position < ApplicationRecord
             places.push(f)
             pos = Position.where(['name = ? AND depth = ?', places.join(' '), i]).last
             if pos
-              pos.update_attribute(:quantity, pos.quantity + params[:quantity])
+              pos.update_attribute(:quantity, pos.quantity.to_i + params[:quantity].to_i)
             else
-              existing.update_attribute(quantity: params[:quantity])
+              existing.update_attribute(quantity: params[:quantity].to_i)
             end
           end
         else
@@ -53,12 +54,12 @@ class Position < ApplicationRecord
             places.push(f)
             pos = Position.where(['name = ? AND depth = ?', places.join(' '), i]).last
             if pos
-              pos.update_attribute(:quantity, pos.quantity + params[:quantity])
+              pos.update_attribute(:quantity, pos.quantity.to_i + params[:quantity].to_i)
             else
               if i == new_position.name.split(' ').size - 1
-                Position.create!(name: places.join(' '), depth: i, quantity: params[:quantity], product_id: params[:product_id])
+                new_position = Position.create!(name: places.join(' '), depth: i, quantity: params[:quantity].to_i, product_id: params[:product_id].to_i)
               else
-                Position.create!(name: places.join(' '), depth: i, quantity: params[:quantity])
+                new_position = Position.create!(name: places.join(' '), depth: i, quantity: params[:quantity].to_i)
               end
             end
           end
