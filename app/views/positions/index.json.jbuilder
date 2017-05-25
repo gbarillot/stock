@@ -1,10 +1,8 @@
-total = 0
 json.positions @positions.each do |position|
   json.id position.id
   json.name position.name
   json.quantity position.quantity
-  total += position.quantity
-  
+
   json.product do
     json.id position.product.id
     json.name position.product.name
@@ -14,6 +12,6 @@ json.positions @positions.each do |position|
 end
 
 json.metrics do
-  json.count total
-  json.positions @positions.count
+  json.positions @items.count
+  json.count @count
 end

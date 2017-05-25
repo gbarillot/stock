@@ -101,3 +101,23 @@ ul.breadcrumb li:first-child {
     }
   }
 }
+ul.editor {
+  form {
+    margin-top: 20px;
+    display: none;
+  }
+}
+ul.editor li {
+  border-bottom: 1px solid #ddd;
+}
+ul.editor li:last-child, ul.editor li:first-child {
+  padding: 20px 0;
+  border-bottom: 0;
+}
+ul.editor li a {
+  font-size: 20px;
+}
+ul.editor li a span {
+  display: inline-block;
+  width: 20px;
+}

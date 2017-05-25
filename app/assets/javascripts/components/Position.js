@@ -10,7 +10,7 @@ const Position = Vue.component('Position', {
         <hr />
         <p class="card-footer">
           <strong style='float: right'><a class='btn btn-action' v-bind:href="'/#/positions/' + position.id">{{position.name}}</a></strong>
-          <a class='btn btn-action'>{{position.quantity}}</a></button>
+          <a class='btn btn-action' data-toggle="modal" data-target="#moveProduct">{{position.quantity}}</a></button>
         </p>
       </div>
     </div>

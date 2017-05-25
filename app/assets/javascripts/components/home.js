@@ -10,6 +10,7 @@ const Home = Vue.component('Home', {
         </div>
       </div>
       <ModalCreate></ModalCreate>
+      <ModalMove></ModalMove>
     </div>`,
 
   data: function(){

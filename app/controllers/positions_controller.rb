@@ -3,7 +3,9 @@ class PositionsController < ApplicationController
   layout false
 
   def index
-    @positions = Position.where(['product_id IS NOT NULL']).order('updated_at DESC')
+    @items = Position.where('product_id IS NOT NULL')
+    @count = Position.where('product_id IS NOT NULL').sum('quantity')
+    @positions = Position.where(['product_id IS NOT NULL']).order('updated_at DESC').limit(20)
   end
 
   def show

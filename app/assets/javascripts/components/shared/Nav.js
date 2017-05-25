@@ -6,10 +6,11 @@ const Nav = Vue.component('Nav', {
           <input
            v-model="q"
            v-on:keyup="search"
+           v-on:focus="redirect"
 
            class="form-control col-md-12 col-sm-8"
            type="text"
-           placeholder="Rechercher une référence ou un #emplacement..."
+           placeholder="Référence ou #emplacement..."
           />
       </form>
       <span class="metrics">{{metrics[0]}}/{{metrics[1]}}</span>
@@ -23,7 +24,7 @@ const Nav = Vue.component('Nav', {
   methods: {
     search: function() {
       that = this
-      delay(function(){
+      delay(function() {
         $.get('/positions/autocomplete', {q: that.q})
           .done(function(data) {
             store.state.metrics = [data.metrics.positions, data.metrics.count]
@@ -31,6 +32,9 @@ const Nav = Vue.component('Nav', {
           }
         )
       }, 300 )
+    },
+    redirect: function() {
+      window.location.href= '/#/'
     }
   }
 })
