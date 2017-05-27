@@ -13,7 +13,6 @@ const LocationsShow = Vue.component('LocationsShow', {
           </div>
         </div>
       </div>
-      <ModalCreate></ModalCreate>
     </div>`,
 
   data: function(){

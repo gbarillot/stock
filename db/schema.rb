@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170527132533) do
+ActiveRecord::Schema.define(version: 20170527161458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 20170527132533) do
     t.integer "position_id"
     t.integer "order_id"
     t.integer "quantity", default: 0
+    t.index ["order_id"], name: "index_baskets_on_order_id"
+    t.index ["position_id"], name: "index_baskets_on_position_id"
   end
 
   create_table "histories", force: :cascade do |t|
@@ -42,6 +44,8 @@ ActiveRecord::Schema.define(version: 20170527132533) do
     t.integer "user_id"
     t.datetime "due_at"
     t.string "state", default: "busy"
+    t.index ["reference"], name: "index_orders_on_reference"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "positions", force: :cascade do |t|
@@ -52,6 +56,10 @@ ActiveRecord::Schema.define(version: 20170527132533) do
     t.integer "quantity"
     t.integer "product_id"
     t.integer "free", default: 0
+    t.index ["free"], name: "index_positions_on_free"
+    t.index ["name"], name: "index_positions_on_name"
+    t.index ["product_id"], name: "index_positions_on_product_id"
+    t.index ["quantity"], name: "index_positions_on_quantity"
   end
 
   create_table "products", force: :cascade do |t|
@@ -62,6 +70,9 @@ ActiveRecord::Schema.define(version: 20170527132533) do
     t.integer "quantity", default: 0
     t.string "notes"
     t.string "ean13"
+    t.index ["name"], name: "index_products_on_name"
+    t.index ["quantity"], name: "index_products_on_quantity"
+    t.index ["reference"], name: "index_products_on_reference"
   end
 
   create_table "users", force: :cascade do |t|

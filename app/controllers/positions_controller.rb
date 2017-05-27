@@ -3,7 +3,7 @@ class PositionsController < ApplicationController
   layout false
 
   def index
-    @positions = Position.where(['product_id IS NOT NULL']).order('updated_at DESC').limit(20)
+    @positions = Position.joins(:product).where(['product_id IS NOT NULL AND products.reference != ?', '0000']).order('updated_at DESC').limit(20)
     @items = Position.where('product_id IS NOT NULL')
     @count = Position.where('product_id IS NOT NULL').sum('quantity')
   end
@@ -14,7 +14,7 @@ class PositionsController < ApplicationController
 
   def available
     if params[:id].to_i > 0 && params[:quantity].to_i > 0
-      @positions = Position.where(['free >= ? product_id IS NOT NULL AND (product_id = ? OR quantity = ?)', params[:quantity], params[:id], 0])
+      @positions = Position.where(['free >= ? AND product_id IS NOT NULL AND (product_id = ? OR quantity = ?)', params[:quantity], params[:id], 0])
     else
       @positions = []
     end

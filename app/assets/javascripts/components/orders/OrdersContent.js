@@ -75,11 +75,13 @@ const OrdersContent = Vue.component('OrdersContent', {
         if(that.q == ''){
           that.positions = []
         } else {
-          $.get('/positions/autocomplete', {q: that.q})
-            .done(function(data) {
-              that.positions = data.positions
-            }
-          )
+          if(that.q.length > 2) {
+            $.get('/positions/autocomplete', {q: that.q})
+              .done(function(data) {
+                that.positions = data.positions
+              }
+            )
+          }
         }
       }, 300 )
     },

@@ -30,7 +30,7 @@ const ModalMenu = Vue.component('ModalMenu', {
               </li>
               <li class='separator'></li>
               <li>
-                <a href='/#/orders/new' v-on:click="goToPage"><span>+</span> Mon compte</a>
+                <a href='/#/' v-on:click="goToPage"><span>+</span> Mon compte</a>
               </li>
             </ul>
           </div>

@@ -6,7 +6,7 @@ json.positions @positions.each do |position|
 
   json.product do
     json.id position.product.id
-    json.name position.product.name
+    json.name position.product.name.truncate(25)
     json.reference position.product.reference
     json.ean13 position.product.ean13
   end

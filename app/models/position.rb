@@ -57,7 +57,7 @@ class Position < ApplicationRecord
             places.push(f)
             pos = Position.where(['name = ? AND depth = ?', places.join(' '), i]).last
             if pos
-              pos.update_attribute(:quantity, pos.quantity.to_i + params[:quantity].to_i)
+              pos.update_attributes(quantity: pos.quantity.to_i + params[:quantity].to_i, free: (pos.free.to_i - params[:quantity].to_i))
             else
               if i == position_depth - 1
                 new_position = Position.create!(name: places.join(' '), depth: i, quantity: params[:quantity].to_i, product_id: params[:product_id].to_i)
