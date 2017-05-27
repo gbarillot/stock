@@ -1,6 +1,6 @@
 const ModalMove = Vue.component('ModalMove', {
   template: `
-    <div aria-hidden='true' aria-labelledby='myModalLabel' class='modal fade' id='moveProduct' role='dialog' tabindex='-1'>
+    <div aria-hidden='true' aria-labelledby='myModalLabel' class='modal' id='moveProduct' role='dialog' tabindex='-1'>
       <div class='modal-dialog' role='document'>
         <div class='modal-content'>
           <div class='modal-header'>
@@ -11,7 +11,6 @@ const ModalMove = Vue.component('ModalMove', {
           </div>
 
           <div class='modal-body'>
-
             <ul class='editor'>
               <li>
                 <a href='#' v-on:click="openToggleForm"><span>+</span> Déplacer</a>
@@ -20,9 +19,12 @@ const ModalMove = Vue.component('ModalMove', {
                     <label>Nouvel emplacement<em>*</em></label>
                     <input name="position[name]" type="text" value="" />
                   </div>
+                  <div class='form-group' style='text-align: center'>
+                    <input type="submit" name="commit" value="Enregistrer" class="btn btn-primary" />
+                  </div>
                 </form>
               </li>
-              <li></li>
+              <li class='separator'></li>
               <li>
                 <a href='#' v-on:click="openToggleForm"><span>+</span> Sortir</a>
                 <form data-component="Products" v-on:submit="moveProduct" accept-charset="UTF-8" method="post">
@@ -30,14 +32,12 @@ const ModalMove = Vue.component('ModalMove', {
                     <label>Réference de la commande<em>*</em></label>
                     <input name="position[name]" type="text" value="" />
                   </div>
+                  <div class='form-group' style='text-align: center'>
+                    <input type="submit" name="commit" value="Enregistrer" class="btn btn-primary" />
+                  </div>
                 </form>
               </li>
             </ul>
-
-            <div class='modal-footer'>
-              <input type="submit" name="commit" value="Enregistrer" class="btn btn-primary" />
-              <button class='btn btn-secondary' data-dismiss='modal' type='button'>Annuler</button>
-            </div>
           </div>
         </div>
       </div>
@@ -65,39 +65,8 @@ const ModalMove = Vue.component('ModalMove', {
       }
     },
     moveProduct: function(e) {
-      // e.preventDefault();
-      // that = this;
-      // $("[data-error]").addClass('hide');
-      // $('.btn-primary.btn.pull-right').prop("disabled", false);
-      //
-      // $.post('/positions', {
-      //     position: {
-      //       product_id: this.new_position.product_id,
-      //       name: this.new_position.name,
-      //       quantity: this.new_position.quantity
-      //     }
-      //   }).always(function(data) {
-      //     $('.btn-primary.btn.pull-right').prop("disabled", false);
-      //   }).done(function(data) {
-      //     store.commit('addPosition', {
-      //       id: data.position.id,
-      //       name: data.position.name,
-      //       quantity: data.position.quantity,
-      //       product: {
-      //         id: data.position.product.id,
-      //         name: data.position.product.name,
-      //         ean13: data.position.product.ean13,
-      //         reference: data.position.product.reference
-      //       }
-      //     });
-      //     $('#createProduct').modal('hide');
-      //   }).fail(function(data){
-      //     $('.btn-primary.btn.pull-right').prop("disabled", false);
-      //     for (var key in data.responseJSON.errors) {
-      //       $("[data-error='"+key+"']").removeClass('hide');
-      //     }
-      //   }
-      // );
+      e.preventDefault();
+      return false;
     }
   }
 })

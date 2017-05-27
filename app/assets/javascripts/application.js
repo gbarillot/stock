@@ -18,6 +18,7 @@
 //= require xhr_setup
 //= require routes
 
+
 const app = new Vue({
   store,
   router

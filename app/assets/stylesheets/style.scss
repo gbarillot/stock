@@ -8,13 +8,59 @@ svg {
     color: #377ab7 !important;
   }
 }
+.input-error {
+  border-bottom: 1px solid red !important;
+}
+.input-error:focus {
+  border-bottom: 1px solid transparent !important;
+}
+.mt-10 {
+  margin-top: 10px;
+}
+.mt-20 {
+  margin-top: 20px;
+}
+.mt-30 {
+  margin-top: 30px;
+}
+ul.breadcrumb {
+  li.metrics {
+    position: absolute;
+    right: 10px;
+    &:before {
+      content: '';
+    }
+  }
+  li.tree-path span {
+    display: inline-block;
+    padding-right: 10px;
+    &:after {
+      content: '/';
+      padding-left: 10px;
+      color: #ccc;
+    }
+    &:last-child {
+      &:after {
+        content: '';
+      }
+    }
+  }
+}
 .navbar {
-  a.btn-add {
-    background-color: red;
+  a.btn-menu {
+    background-color: rgba(50, 50, 50, 0.7) !important;
     i {
       font-style: normal !important;
       font-size: 30px;
     }
+  }
+  a.btn-orders {
+    background-color: rgba(0, 128, 0, 0.7) !important;
+    line-height: 56px;
+    text-align: center;
+    display: block;
+    font-size: 20px;
+    color: #fff !important;
   }
   ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
       color:    #fff !important;
@@ -34,22 +80,62 @@ svg {
   ::-ms-input-placeholder { /* Microsoft Edge */
      color:    #fff !important;
   }
-  form {
-    padding-top: 10px;
-    padding-left: 10px;
-    width: 70%;
-    input {
-      border-color: #ccc;
-      color: #fff;
-      width: 100% !important;
-    }
-  }
   .metrics {
     display: block;
     height: 60px;
     padding-top: 12px;
     margin-left: 20px;
     color: #ddd;
+  }
+  .action-form {
+    width: 70%;
+    float: left;
+    @media (max-width: 992px) {
+      width: 100% !important;
+      float: none;
+    }
+    form {
+      padding-top: 0px;
+      padding-left: 10px;
+      width: 70%;
+      @media (max-width: 992px) {
+        width: 98% !important;
+        float: none;
+      }
+      input {
+        border-color: #ccc;
+        color: #fff;
+        width: 100% !important;
+      }
+    }
+    span.metrics {
+      @media (max-width: 992px) {
+        display: none;
+      }
+    }
+  }
+  .action-buttons {
+    width: 170px;
+    float: right;
+    @media (max-width: 992px) {
+      width: 100%;
+      float: right;
+    }
+    span.metrics {
+      display: none;
+      @media (max-width: 992px) {
+        display: block;
+        float: left;
+        padding-top: 20px;
+      }
+    }
+    a {
+      float: right;
+      @media (max-width: 992px) {
+        display: block;
+        float: right;
+      }
+    }
   }
 }
 form {
@@ -73,9 +159,6 @@ form {
   h4.card-title {
     color: #000 !important;
   }
-}
-ul.breadcrumb li:first-child {
-  float: right;
 }
 .history {
   border-left: 1px solid #ddd;
@@ -108,11 +191,14 @@ ul.editor {
   }
 }
 ul.editor li {
-  border-bottom: 1px solid #ddd;
-}
-ul.editor li:last-child, ul.editor li:first-child {
   padding: 20px 0;
   border-bottom: 0;
+}
+ul.editor li.separator{
+  border-bottom: 1px solid #ddd;
+  height: 0;
+  padding: 0;
+  margin: 0;
 }
 ul.editor li a {
   font-size: 20px;
@@ -132,5 +218,75 @@ ul.editor li a span {
     width: 100% !important;
     margin: 10px 0 10px 0 !important;
   }
+}
+ul.order-products li h5 {
+  line-height: 20px;
+  margin: 0;
+  padding: 0;
+  padding-top: 12px;
+}
+ul.order-products li input[type=text] {
+  width: 80px;
+}
+ul.order-products li input[type=button] {
+  width: 100px;
+}
+ul.order-products li {
+  min-height: 70px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  clear: both;
+  display: flex;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+  .action-form {
+    min-width: 210px;
+    order: 1;
+    @media (max-width: 768px) {
+      order: 2;
+      width: 100%;
+      text-align: center;
+    }
+  }
+  .description {
+    order: 2;
+    @media (max-width: 768px) {
+      width: 100%;
+      order: 1;
+    }
+  }
+}
 
+.loading:after {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: bottom;
+  animation: ellipsis steps(10, end) 900ms infinite;
+  content: "\2026"; /* ascii code for the ellipsis character */
+  width: 0px;
+}
+
+@keyframes ellipsis {
+  to {
+    width: 1.25em;
+  }
+}
+a.availability {
+  width: 10%;
+  min-width: 100px;
+  border: 1px solid #ddd;
+  float: left;
+  height: 60px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+  padding-top: 10px;
+  strong {
+    display: block;
+    width: 100%;
+  }
+}
+.modal-footer a.btn {
+  margin-bottom: 0px;
 }

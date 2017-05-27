@@ -4,7 +4,6 @@
     <title>Labofill</title>
     <meta name="description" content="Gestion d'un stock FTW">
     <%= csrf_meta_tags %>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.3/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.5.3/vue-router.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/2.3.1/vuex.js"></script>
@@ -13,6 +12,14 @@
   </head>
 
   <body>
+    <script type='text/javascript'>
+      currentUser = {
+        id: <%= @current_user.id %>,
+        first_name: "<%= @current_user.first_name %>",
+        last_name: "<%= @current_user.last_name %>"
+      }
+    </script>
+
     <div id='app'>
       <router-view></router-view>
     </div>

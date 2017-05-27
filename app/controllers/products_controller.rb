@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
 
   def index
-    @products = Position.all.order('updated_at DESC')
+    @products = Product.all.order('updated_at DESC')
 
     render json: {products: @products}.to_json
   end

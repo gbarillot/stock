@@ -1,4 +1,4 @@
-const Home = Vue.component('Home', {
+const HomeIndex = Vue.component('HomeIndex', {
   template: `
     <div>
       <Nav></Nav>
@@ -9,8 +9,9 @@ const Home = Vue.component('Home', {
           </div>
         </div>
       </div>
-      <ModalCreate></ModalCreate>
+      <ModalMenu></ModalMenu>
       <ModalMove></ModalMove>
+      <ModalOrders></ModalOrders>
     </div>`,
 
   data: function(){
@@ -22,7 +23,7 @@ const Home = Vue.component('Home', {
        url: '/positions',
        type: 'get',
        success: function (data) {
-         store.state.metrics = [data.metrics.positions, data.metrics.count]
+         store.state.metrics = [data.metrics.positions, data.metrics.count, data.metrics.orders_count]
          store.state.positions = data.positions;
        }
     });

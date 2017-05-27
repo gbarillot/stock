@@ -3,17 +3,29 @@ class PositionsController < ApplicationController
   layout false
 
   def index
+    @positions = Position.where(['product_id IS NOT NULL']).order('updated_at DESC').limit(20)
     @items = Position.where('product_id IS NOT NULL')
     @count = Position.where('product_id IS NOT NULL').sum('quantity')
-    @positions = Position.where(['product_id IS NOT NULL']).order('updated_at DESC').limit(20)
   end
 
   def show
     @position = Position.find(params[:id])
   end
 
+  def available
+    if params[:id].to_i > 0 && params[:quantity].to_i > 0
+      @positions = Position.where(['free >= ? product_id IS NOT NULL AND (product_id = ? OR quantity = ?)', params[:quantity], params[:id], 0])
+    else
+      @positions = []
+    end
+
+    render json: @positions.to_json
+  end
+
   def autocomplete
     @positions = Position.autocomplete(params[:q])
+    @items = @positions
+    @count = @positions.sum('quantity')
 
     render template: '/positions/index'
   end

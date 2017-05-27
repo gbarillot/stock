@@ -38,12 +38,9 @@ const AutocompleteProduct = Vue.component('AutocompleteProduct', {
     pick: function(e) {
       el = $(e.currentTarget);
       this.q = el.find('strong').text()
-      this.products = []
-      store.state.new_position = {
-        product_name: el.find('span').text(),
-        product_id: el.find('i').text()
-      }
-
+      this.products = [];
+      store.state.new_position.product_name = el.find('span').text();
+      store.state.new_position.product_id   = el.find('i').text();
     }
   }
 })

@@ -1,0 +1,29 @@
+fr:
+  hello: "Hello world"
+  time:
+    formats:
+      default: "%d %b %Y %H:%M"
+  states:
+    busy: "En préparation"
+    done: "Prête"
+    delivered: "Livrée"
+  date:
+    abbr_day_names: "---⏎ - dim⏎ - lun⏎ - mar⏎ - mer⏎ - jeu⏎ - ven⏎ - sam"
+    abbr_month_names:
+    -
+    - jan.
+    - fev.
+    - mar.
+    - avr.
+    - mai
+    - juin
+    - juil.
+    - aou.
+    - sept.
+    - oct.
+    - nov.
+    - dec.
+  activerecord:
+    errors:
+      messages:
+        record_invalid: "Valeur invalide"

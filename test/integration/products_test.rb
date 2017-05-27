@@ -2,18 +2,19 @@ require "test_helper"
 
 feature "#show" do
 
+  before do
+    @user = users(:employee)
+    login_as @user
+  end
+
   scenario "fetch all products" do
     get "/products"
-    out = {
-      success: true,
-      products: [
-        {name: "First product", reference: "1234"},
-        {name: "Second product", reference: "5678"}
-    ]}
 
     response = jsonify(last_response.body)
-    assert_equal true, response[:success]
-    assert_equal out, response
+    assert_equal 200, last_response.status
+    assert_equal 2, response[:products].length
+    assert_equal '123456', response[:products].first[:reference]
+    assert_equal '6789', response[:products].second[:reference]
   end
 
 end

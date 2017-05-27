@@ -10,10 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170525162510) do
+ActiveRecord::Schema.define(version: 20170527132533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "baskets", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "position_id"
+    t.integer "order_id"
+    t.integer "quantity", default: 0
+  end
+
+  create_table "histories", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "item_id"
+    t.string "item_type"
+    t.jsonb "actions"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "reference"
+    t.string "name"
+    t.string "barcode"
+    t.integer "created_by"
+    t.integer "user_id"
+    t.datetime "due_at"
+    t.string "state", default: "busy"
+  end
 
   create_table "positions", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -22,6 +51,7 @@ ActiveRecord::Schema.define(version: 20170525162510) do
     t.integer "depth", default: 0
     t.integer "quantity"
     t.integer "product_id"
+    t.integer "free", default: 0
   end
 
   create_table "products", force: :cascade do |t|
@@ -47,6 +77,8 @@ ActiveRecord::Schema.define(version: 20170525162510) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "first_name"
+    t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

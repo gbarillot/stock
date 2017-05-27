@@ -1,4 +1,4 @@
-const PositionDetail = Vue.component('PositionDetail', {
+const PositionShow = Vue.component('PositionShow', {
   template: `
     <div>
       <Nav></Nav>
@@ -13,7 +13,7 @@ const PositionDetail = Vue.component('PositionDetail', {
     </div>`,
 
   data: function(){
-    return store.state
+    positions: []
   },
 
   mounted: function () {

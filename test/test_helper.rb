@@ -11,11 +11,10 @@ require 'minitest/reporters'
 require 'valid_attribute'
 require 'capybara/rails'
 require 'minitest-metadata'
-#require 'webmock/minitest'
 require 'rack/test'
 require 'json_expressions/minitest'
 #require 'webmock_stubs'
-#require 'sidekiq/testing'
+#require 'webmock/minitest'
 require 'vcr'
 
 include ActionDispatch::TestProcess
@@ -69,6 +68,7 @@ end
 
 class ActiveSupport::TestCase
   extend Minitest::Spec::DSL
+
   # Performance: order tests by time taken
   #include Minitest::Profiler
   ActiveRecord::Migration.check_pending!
@@ -89,6 +89,7 @@ class ActiveSupport::TestCase
 
   def setup
     I18n.locale = I18n.default_locale
+    $current_user = users(:employee)
   end
 
   def teardown
@@ -111,78 +112,4 @@ VCR.configure do |config|
   config.default_cassette_options = {
     record: :none, allow_playback_repeats: true
   }
-end
-
-module VCR
-  class << self
-    alias_method 'old_turn_off!', 'turn_off!'
-    alias_method 'old_turn_on!', 'turn_on!'
-
-    # add default inserted cassettes here
-    # VCR.turn_on!
-    @@default_cassette = {
-        name: 'default',
-        options: {
-            allow_playback_repeats: true,
-            match_requests_on: [:host, :method, -> (request_1, request_2) do
-              host1 = URI(request_1.uri).host
-              if  ['api2.appsflyer.com', 'rm.rentalsunited.com', 'netverify.com'].include?(host1)
-                true
-              elsif ['api.siftscience.com', 'api.mixpanel.com'].include?(host1)
-                request_1.uri.include?(request_2.uri)
-              elsif host1 == 'pal-test.adyen.com'
-                if request_1.uri == request_2.uri
-                  if request_1.uri.include?('pal/adapter/httppost')
-                    !!((Regexp.new request_2.body) =~ request_1.body)
-                  else
-                    true
-                  end
-                end
-              else
-                request_1.uri == request_2.uri
-              end
-            end],
-        }
-    }
-
-    VCR.insert_cassette(@@default_cassette[:name], @@default_cassette[:options])
-
-    def turn_off!(options = {})
-      VCR.eject_cassette
-      old_turn_off!(options)
-    end
-
-    def turn_on!
-      old_turn_on!
-      VCR.insert_cassette(@@default_cassette[:name], @@default_cassette[:options]) unless VCR.current_cassette
-    end
-  end
-end
-
-class ActiveRecord::Base
-  def fixture_dump(args={})
-    entity = self
-    attributes = entity.attributes
-    columns_hash = entity.class.columns_hash
-    keys = columns_hash.keys
-    exclude = args.fetch(:exclude, [])
-    return Hash[(args.fetch(:include, keys) & keys)
-                    .select{|key| !exclude.include?(key) && !attributes[key].nil?}
-                    .map{|key| [key, columns_hash[key].type_cast_for_database(attributes[key]).to_s]}
-    ]
-  end
-end
-
-class ActiveRecord::Base
-  def fixture_dump(args={})
-    entity = self
-    attributes = entity.attributes
-    columns_hash = entity.class.columns_hash
-    keys = columns_hash.keys
-    exclude = args.fetch(:exclude, [])
-    return Hash[(args.fetch(:include, keys) & keys)
-      .select{|key| !exclude.include?(key) && !attributes[key].nil?}
-      .map{|key| [key, columns_hash[key].type_cast_for_database(attributes[key]).to_s]}
-    ]
-  end
 end

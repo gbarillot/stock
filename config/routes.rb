@@ -7,5 +7,15 @@ Rails.application.routes.draw do
   resources :products
 
   get 'positions/autocomplete', to: 'positions#autocomplete'
+  get 'positions/available', to: 'positions#available'
   resources :positions
+
+  resources :orders
+  resources :users
+
+  get '/baskets/:order_id', to: 'baskets#show'
+  post '/baskets/add', to: 'baskets#create'
+  post '/baskets/remove', to: 'baskets#destroy'
+
+  get '/locations/:slug', to: 'locations#show'
 end

@@ -12,8 +12,9 @@ json.positions @positions.each do |position|
   end
 end
 
+json.tree full_tree(params[:slug])
+
 json.metrics do
   json.positions @items.count
   json.count @count
-  json.orders_count Order.waiting_for(current_user).count
 end
