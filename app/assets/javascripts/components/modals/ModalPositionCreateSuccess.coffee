@@ -1,5 +1,5 @@
-const ModalPositionCreateSuccess = Vue.component('ModalPositionCreateSuccess', {
-  template: `
+ModalPositionCreateSuccess = Vue.component('ModalPositionCreateSuccess',
+  template: '''
     <div aria-hidden='true' aria-labelledby='myModalLabel' class='modal' id='positionCreateSuccess' role='dialog' tabindex='-1'>
       <div class='modal-dialog' role='document'>
         <div class='modal-content'>
@@ -19,25 +19,20 @@ const ModalPositionCreateSuccess = Vue.component('ModalPositionCreateSuccess', {
         </div>
       </div>
     </div>
-  `,
+  ''',
 
-  data: function(){
-    return store.state
-  },
-
-  methods: {
-    goToPage: function(e) {
-      e.preventDefault();
-      lnk = $(e.target);
-      $('.modal').modal('hide');
-      $('.autocomplete input').val('');
-      store.state.new_position = {
-        product_name: '',
-        product_id: '',
-        quantity: '',
-        reference: ''
-      };
-      location.href = $(lnk).attr('href')
-    }
-  }
-})
+  data: ->
+    store.state
+  methods: goToPage: (e) ->
+    e.preventDefault()
+    lnk = $(e.target)
+    $('.modal').modal 'hide'
+    $('.autocomplete input').val ''
+    store.state.new_position =
+      product_name: ''
+      product_id: ''
+      quantity: ''
+      reference: ''
+    location.href = $(lnk).attr('href')
+    return
+)

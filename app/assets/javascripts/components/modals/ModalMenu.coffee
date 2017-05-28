@@ -1,5 +1,5 @@
-const ModalMenu = Vue.component('ModalMenu', {
-  template: `
+@ModalMenu = Vue.component('ModalMenu',
+  template: '''
     <div aria-hidden='true' aria-labelledby='myModalLabel' class='modal' id='showMenu' role='dialog' tabindex='-1'>
       <div class='modal-dialog' role='document'>
         <div class='modal-content'>
@@ -37,18 +37,14 @@ const ModalMenu = Vue.component('ModalMenu', {
         </div>
       </div>
     </div>
-  `,
+  '''
 
-  data: function(){
-    return store.state
-  },
-
-  methods: {
-    goToPage: function(e) {
-      e.preventDefault();
-      lnk = $(e.target);
-      $('#showMenu').modal('hide');
-      location.href = $(lnk).attr('href')
-    }
-  }
-})
+  data: ->
+    store.state
+  methods: goToPage: (e) ->
+    e.preventDefault()
+    lnk = $(e.target)
+    $('#showMenu').modal 'hide'
+    location.href = $(lnk).attr('href')
+    return
+)

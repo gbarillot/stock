@@ -1,5 +1,5 @@
-const ModalMove = Vue.component('ModalMove', {
-  template: `
+@ModalMove = Vue.component('ModalMove',
+  template: '''
     <div aria-hidden='true' aria-labelledby='myModalLabel' class='modal' id='moveProduct' role='dialog' tabindex='-1'>
       <div class='modal-dialog' role='document'>
         <div class='modal-content'>
@@ -42,31 +42,26 @@ const ModalMove = Vue.component('ModalMove', {
         </div>
       </div>
     </div>
-  `,
+  '''
 
-  data: function(){
-    return store.state
-  },
-
-  methods: {
-    openToggleForm: function(e) {
-      e.preventDefault();
-      lnk = $(e.target);
-      if (lnk.find('span').text() == '+'){
-        lnk.find('span').text('-')
-        lnk.parent().find('form').show();
-        lnk.parent().parent().find('li').hide();
-        lnk.parent().parent().find('li').css('border-color: #fff')
-        lnk.parent().show();
-      } else {
-        lnk.find('span').text('+')
-        lnk.parent().find('form').hide();
-        lnk.parent().parent().find('li').show();
-      }
-    },
-    moveProduct: function(e) {
-      e.preventDefault();
-      return false;
-    }
-  }
-})
+  data: ->
+    store.state
+  methods:
+    openToggleForm: (e) ->
+      e.preventDefault()
+      lnk = $(e.target)
+      if lnk.find('span').text() == '+'
+        lnk.find('span').text '-'
+        lnk.parent().find('form').show()
+        lnk.parent().parent().find('li').hide()
+        lnk.parent().parent().find('li').css 'border-color: #fff'
+        lnk.parent().show()
+      else
+        lnk.find('span').text '+'
+        lnk.parent().find('form').hide()
+        lnk.parent().parent().find('li').show()
+      return
+    moveProduct: (e) ->
+      e.preventDefault()
+      false
+)

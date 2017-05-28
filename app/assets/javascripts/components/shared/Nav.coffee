@@ -1,5 +1,5 @@
-const Nav = Vue.component('Nav', {
-  template: `
+Nav = Vue.component('Nav',
+  template: '''
     <nav class="navbar navbar-light bg-primary">
       <div class='action-form'>
         <form class="form-inline pull-xs-right autocomplete">
@@ -21,26 +21,26 @@ const Nav = Vue.component('Nav', {
         <a href="/#/orders/me" type="button" class="btn-floating btn-large btn-orders">{{metrics[2]}}</a>
       </div>
     </nav>
-  `,
+  '''
 
-  data: function() {
-    return store.state
-  },
-
-  methods: {
-    search: function() {
+  data: ->
+    store.state
+  methods:
+    search: ->
       that = this
-      delay(function() {
-        $.get('/positions/autocomplete', {q: that.q})
-          .done(function(data) {
-            store.state.metrics = [data.metrics.positions, data.metrics.count, data.metrics.orders_count]
-            store.state.positions = data.positions
-          }
-        )
-      }, 300 )
-    },
-    redirect: function() {
-      window.location.href= '/#/'
-    }
-  }
-})
+      delay (->
+        $.get('/positions/autocomplete', q: that.q).done (data) ->
+          store.state.metrics = [
+            data.metrics.positions
+            data.metrics.count
+            data.metrics.orders_count
+          ]
+          store.state.positions = data.positions
+          return
+        return
+      ), 300
+      return
+    redirect: ->
+      window.location.href = '/#/'
+      return
+)

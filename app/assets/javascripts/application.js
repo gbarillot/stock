@@ -15,9 +15,8 @@
 //= require helpers
 //= require_tree ./components
 //= require store
-//= require xhr_setup
+//= require setup
 //= require routes
-
 
 const app = new Vue({
   store,

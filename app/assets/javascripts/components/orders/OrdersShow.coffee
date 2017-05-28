@@ -1,5 +1,5 @@
-const OrdersShow = Vue.component('OrdersShow', {
-  template: `
+@OrdersShow = Vue.component('OrdersShow',
+  template: '''
     <div>
       <ul class=breadcrumb>
         <li><a href='/#/'><i class='fa fa-home'></i></a></li>
@@ -14,20 +14,18 @@ const OrdersShow = Vue.component('OrdersShow', {
         </div>
       </div>
       <ModalOrderState></ModalOrderState>
-    </div>`,
+    </div>
+  '''
 
-  data: function(){
-    return store.state;
-  },
-
-  mounted: function () {
-    let that = this;
-    $.ajax({
-       url: '/orders/me',
-       type: 'get',
-       success: function (data) {
-         store.state.orders = data.orders
-       }
-    });
-  }
-})
+  data: ->
+    store.state
+  mounted: ->
+    that = this
+    $.ajax
+      url: '/orders/me'
+      type: 'get'
+      success: (data) ->
+        store.state.orders = data.orders
+        return
+    return
+)

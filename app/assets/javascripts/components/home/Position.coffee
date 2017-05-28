@@ -1,5 +1,5 @@
-const Position = Vue.component('Position', {
-  template: `
+@Position = Vue.component('Position',
+  template: '''
     <div class="card">
       <div class="card-block">
         <h4 class="card-title"><a v-bind:href="'/#/products/' + position.product.id">{{position.product.reference}}</a></h4>
@@ -14,15 +14,10 @@ const Position = Vue.component('Position', {
         </p>
       </div>
     </div>
-  `,
+  ''',
 
-  props: {
-    position: {
-      type: Object,
-      default: function() {
-        return {}
-      }
-    }
-  }
-
-})
+  props: position:
+    type: Object
+    default: ->
+      {}
+)

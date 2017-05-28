@@ -1,5 +1,5 @@
-const ModalOrders = Vue.component('ModalOrders', {
-  template: `
+@ModalOrders = Vue.component('ModalOrders',
+  template: '''
     <div aria-hidden='true' aria-labelledby='myModalLabel' class='modal' id='ordersMenu' role='dialog' tabindex='-1'>
       <div class='modal-dialog' role='document'>
         <div class='modal-content'>
@@ -29,18 +29,14 @@ const ModalOrders = Vue.component('ModalOrders', {
         </div>
       </div>
     </div>
-  `,
+  ''',
 
-  data: function(){
-    return store.state
-  },
-
-  methods: {
-    goToPage: function(e) {
-      e.preventDefault();
-      lnk = $(e.target);
-      $('#ordersMenu').modal('hide');
-      location.href = $(lnk).attr('href')
-    }
-  }
-})
+  data: ->
+    store.state
+  methods: goToPage: (e) ->
+    e.preventDefault()
+    lnk = $(e.target)
+    $('#ordersMenu').modal 'hide'
+    location.href = $(lnk).attr('href')
+    return
+)

@@ -1,5 +1,5 @@
-const OrdersNew = Vue.component('OrdersNew', {
-  template: `
+@OrdersNew = Vue.component('OrdersNew',
+  template: '''
     <div>
       <ul class=breadcrumb>
         <li><a href='/#/'><i class='fa fa-home'></i></a></li>
@@ -89,46 +89,38 @@ const OrdersNew = Vue.component('OrdersNew', {
           </div>
         </div>
       </div>
-    </div>`,
+    </div>
+  '''
 
-  data: function() {
-    return {
-      users: [],
-      order: {
-        user_id: currentUser.id,
-        due_hour: 0,
-        due_minutes: 0,
+  data: ->
+    {
+      users: []
+      order:
+        user_id: currentUser.id
+        due_hour: 0
+        due_minutes: 0
         due_date: ''
-      }
     }
-  },
-
-  mounted: function () {
-    let that = this
-    $.ajax({
-       url: '/users',
-       type: 'get',
-       success: function (data) {
-         that.users = data
-       }
-    });
-    $('.pick-date div').datepicker({
-      format: 'yyyy-mm-dd'
-    }).on('changeDate', function() {
-      that.order.due_date = $(this).datepicker('getFormattedDate');
-    });
-  },
-
-  methods: {
-    createOrder: function(e) {
-      e.preventDefault();
-      let that = this;
-
-      $.post('/orders', {order: that.order}).always(function(data) {
-        $('.btn-primary.btn.pull-right').prop("disabled", false);
-      }).done(function(data) {
-        window.location = '/#/orders/' + data.id
-      })
-    }
-  }
-})
+  mounted: ->
+    that = this
+    $.ajax
+      url: '/users'
+      type: 'get'
+      success: (data) ->
+        that.users = data
+        return
+    $('.pick-date div').datepicker(format: 'yyyy-mm-dd').on 'changeDate', ->
+      that.order.due_date = $(this).datepicker('getFormattedDate')
+      return
+    return
+  methods: createOrder: (e) ->
+    e.preventDefault()
+    that = this
+    $.post('/orders', order: that.order).always((data) ->
+      $('.btn-primary.btn.pull-right').prop 'disabled', false
+      return
+    ).done (data) ->
+      window.location = '/#/orders/' + data.id
+      return
+    return
+)

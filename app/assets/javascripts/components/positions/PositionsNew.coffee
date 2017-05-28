@@ -1,5 +1,5 @@
-const PositionsNew = Vue.component('PositionsNew', {
-  template: `
+@PositionsNew = Vue.component('PositionsNew',
+  template: '''
   <div>
     <ul class=breadcrumb>
       <li><a href='/#/'><i class='fa fa-home'></i></a></li>
@@ -45,53 +45,39 @@ const PositionsNew = Vue.component('PositionsNew', {
       </div>
     </div>
     <ModalPositionCreateSuccess></ModalPositionCreateSuccess>
-  </div>
-  `,
+  </div>'''
 
-  data: function(){
-    return store.state
-  },
-
-  watch: {
-    'new_position': {
-      deep: true,
-      handler: function(to, from) {
-        if(store.state.new_position.product_id != '' && store.state.new_position.quantity != ''){
-          $.ajax({
-             url: '/positions/available',
-             type: 'get',
-             data: {
-               id: store.state.new_position.product_id,
-               quantity: store.state.new_position.quantity
-             },
-             success: function (data) {
-               store.state.availabilities = data;
-             }
-          });
-        } else {
-          store.state.availabilities = []
-        }
-      }
-    },
-  },
-
-  methods: {
-    saveQuantity: function(e) {
-      store.state.new_position.quantity = $(e.target).val()
-    },
-    linkProduct: function(e, name) {
-      $.post('/positions', {
-          position: {
-            product_id: store.state.new_position.product_id,
-            name: name,
+  data: ->
+    store.state
+  watch: 'new_position':
+    deep: true
+    handler: (to, from) ->
+      if store.state.new_position.product_id != '' and store.state.new_position.quantity != ''
+        $.ajax
+          url: '/positions/available'
+          type: 'get'
+          data:
+            id: store.state.new_position.product_id
             quantity: store.state.new_position.quantity
-          }
-        }).done(function(data) {
-          $('#positionCreateSuccess').modal();
-        }).fail(function(data){
-          alert('An error has occured');
-        }
-      );
-    }
-  }
-})
+          success: (data) ->
+            store.state.availabilities = data
+            return
+      else
+        store.state.availabilities = []
+      return
+  methods:
+    saveQuantity: (e) ->
+      store.state.new_position.quantity = $(e.target).val()
+      return
+    linkProduct: (e, name) ->
+      $.post('/positions', position:
+        product_id: store.state.new_position.product_id
+        name: name
+        quantity: store.state.new_position.quantity).done((data) ->
+        $('#positionCreateSuccess').modal()
+        return
+      ).fail (data) ->
+        alert 'An error has occured'
+        return
+      return
+)

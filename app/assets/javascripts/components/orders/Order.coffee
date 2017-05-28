@@ -1,5 +1,6 @@
-const Order = Vue.component('Order', {
-  template: `
+@Order = Vue.component('Order',
+
+  template: '''
     <div class="card">
       <div class="card-block">
         <h4 class="card-title"><a :href="'/#/orders/'+order.id">{{order.reference}}</a></h4>
@@ -19,24 +20,15 @@ const Order = Vue.component('Order', {
         </p>
       </div>
     </div>
-  `,
+  '''
 
-  props: {
-    order: {
-      type: Object,
-      default: function() {
-        return {}
-      }
-    }
-  },
-
-  methods : {
-    toggleStateModal: function(e, state, id) {
-       store.state.current_order.state = state;
-       store.state.current_order.id = id;
-
-      $('#orderState').modal()
-    }
-  }
-
-})
+  props: order:
+    type: Object
+    default: ->
+      {}
+  methods: toggleStateModal: (e, state, id) ->
+    store.state.current_order.state = state
+    store.state.current_order.id = id
+    $('#orderState').modal()
+    return
+)

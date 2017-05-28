@@ -1,5 +1,5 @@
-const ProductShow = Vue.component('ProductShow', {
-  template: `
+@ProductShow = Vue.component('ProductShow',
+  template: '''
     <div>
       <ul class=breadcrumb>
         <li><a href='/#/'><i class='fa fa-home'></i></a></li>
@@ -26,30 +26,27 @@ const ProductShow = Vue.component('ProductShow', {
         </div>
       </div>
     </div>
-  </div>
-  `,
+  </div>'''
 
-  data: function() {
-    return {
-      product: {},
-      position: [],
-      metrics: {
-        total: 0
-      }
+  data: ->
+    {
+      product: {}
+      position: []
+      metrics: total: 0
     }
-  },
-
-  mounted: function () {
-    let that = this
-    $.ajax({
-       url: '/products/' + this.$route.params.id,
-       type: 'get',
-       success: function (data) {
-         store.state.metrics = [data.metrics.positions, data.metrics.count]
-         that.product = data.product;
-         that.position = data.product.positions;
-         that.metrics.total = data.metrics.count;
-       }
-    });
-  }
-})
+  mounted: ->
+    that = this
+    $.ajax
+      url: '/products/' + @$route.params.id
+      type: 'get'
+      success: (data) ->
+        store.state.metrics = [
+          data.metrics.positions
+          data.metrics.count
+        ]
+        that.product = data.product
+        that.position = data.product.positions
+        that.metrics.total = data.metrics.count
+        return
+    return
+)

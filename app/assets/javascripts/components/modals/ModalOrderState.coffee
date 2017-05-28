@@ -1,5 +1,5 @@
-const ModalOrderState = Vue.component('ModalOrderState', {
-  template: `
+@ModalOrderState = Vue.component('ModalOrderState',
+  template: '''
     <div aria-hidden='true' aria-labelledby='myModalLabel' class='modal' id='orderState' role='dialog' tabindex='-1'>
       <div class='modal-dialog' role='document'>
         <div class='modal-content'>
@@ -29,35 +29,26 @@ const ModalOrderState = Vue.component('ModalOrderState', {
         </div>
       </div>
     </div>
-  `,
+  '''
 
-  data: function(){
-    return store.state
-  },
-
-  methods: {
-    setState: function(e, state, id) {
-      let that = this;
-      $.ajax({
-        url: ('/orders/' + id),
-        method: 'PUT',
-        data: {
-          order: {
-            state: state
-          }
-        },
-        success: function(data) {
-          let updated_orders = store.state.orders
-          for(var i = 0; i < updated_orders.length; i++){
-            if(data.orders[0].id === updated_orders[i].id){
-              updated_orders[i] = data.orders[0]
-            }
-          }
-          store.state.orders = []
-          store.state.orders = updated_orders;
-          $('#orderState').modal('hide');
-        }
-      });
-    }
-  }
-})
+  data: ->
+    store.state
+  methods: setState: (e, state, id) ->
+    that = this
+    $.ajax
+      url: '/orders/' + id
+      method: 'PUT'
+      data: order: state: state
+      success: (data) ->
+        updated_orders = store.state.orders
+        i = 0
+        while i < updated_orders.length
+          if data.orders[0].id == updated_orders[i].id
+            updated_orders[i] = data.orders[0]
+          i++
+        store.state.orders = []
+        store.state.orders = updated_orders
+        $('#orderState').modal 'hide'
+        return
+    return
+)

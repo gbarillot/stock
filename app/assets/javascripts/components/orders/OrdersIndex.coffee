@@ -1,5 +1,5 @@
-const OrdersIndex = Vue.component('OrdersIndex', {
-  template: `
+@OrdersIndex = Vue.component('OrdersIndex',
+  template: '''
     <div>
       <ul class=breadcrumb>
         <li><a href='/#/'><i class='fa fa-home'></i></a></li>
@@ -13,20 +13,17 @@ const OrdersIndex = Vue.component('OrdersIndex', {
         </div>
       </div>
       <ModalOrderState></ModalOrderState>
-    </div>`,
+    </div>'''
 
-  data: function(){
-    return store.state;
-  },
-
-  mounted: function () {
-    let that = this;
-    $.ajax({
-       url: '/orders/all',
-       type: 'get',
-       success: function (data) {
-         store.state.orders = data.orders
-       }
-    });
-  }
-})
+  data: ->
+    store.state
+  mounted: ->
+    that = this
+    $.ajax
+      url: '/orders/all'
+      type: 'get'
+      success: (data) ->
+        store.state.orders = data.orders
+        return
+    return
+)
