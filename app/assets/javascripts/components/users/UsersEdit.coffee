@@ -1,4 +1,4 @@
-@UsersEdit = Vue.component 'UsersEdit',
+@UsersEdit = Vue.component('UsersEdit',
 
   template: '''
     <div>
@@ -41,7 +41,7 @@
 
   data: ->
     {
-      user: {},
+      user: {}
       errors: {}
     }
   mounted: ->
@@ -57,7 +57,7 @@
     that = this
     $.ajax
       url: '/users'
-      type: 'post',
+      type: 'post'
       data:
         user:
           first_name: that.user.first_name
@@ -75,3 +75,4 @@
             msg = message
           errors[error] = msg
         that.errors = errors
+)
