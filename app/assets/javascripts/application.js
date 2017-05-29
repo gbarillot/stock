@@ -19,6 +19,6 @@
 //= require routes
 
 const app = new Vue({
-  store,
-  router
+  store: store,
+  router: router
 }).$mount('#app')

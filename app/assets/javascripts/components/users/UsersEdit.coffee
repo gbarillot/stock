@@ -1,4 +1,4 @@
-@UsersEdit = Vue.component('UsersEdit',
+@UsersEdit = Vue.component 'UsersEdit',
 
   template: '''
     <div>
@@ -75,4 +75,3 @@
             msg = message
           errors[error] = msg
         that.errors = errors
-)
