@@ -8,9 +8,31 @@ class UsersController < ApplicationController
     render json: @users.to_json
   end
 
+  def show
+    @user = User.find(current_user.id)
+  end
+
+  def create
+    @user = User.find(current_user.id)
+
+    if params[:user][:password].blank?
+      if @user.update_attributes(first_name: params[:user][:first_name], last_name: params[:user][:last_name])
+        render action: :show
+      else
+        render json: {errors: @user.errors.messages}.to_json, status: 422
+      end
+    else
+      if @user.update_attributes(user_params)
+        render action: :show
+      else
+        render json: {errors: @user.errors.messages}.to_json, status: 422
+      end
+    end
+  end
+
 private
-  def order_params
-    params.require(:order).permit(:reference, :name, :user_id, :due_at).merge(created_by: current_user.id)
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :password, :password_confirmation)
   end
 
 end

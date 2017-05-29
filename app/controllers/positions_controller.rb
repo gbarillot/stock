@@ -14,7 +14,13 @@ class PositionsController < ApplicationController
 
   def available
     if params[:id].to_i > 0 && params[:quantity].to_i > 0
-      @positions = Position.where(['free >= ? AND product_id IS NOT NULL AND (product_id = ? OR quantity = ?)', params[:quantity], params[:id], 0])
+      @positions = Position.where([
+        'free >= ?
+        AND product_id
+        IS NOT NULL
+        AND (product_id = ? OR quantity = ?)',
+        params[:quantity], params[:id], 0
+      ]).limit(50)
     else
       @positions = []
     end

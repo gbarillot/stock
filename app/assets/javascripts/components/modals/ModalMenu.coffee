@@ -30,7 +30,7 @@
               </li>
               <li class='separator'></li>
               <li>
-                <a href='/#/' v-on:click="goToPage"><span>+</span> Mon compte</a>
+                <a href='/#/users' v-on:click="goToPage"><span>+</span> Mon compte</a>
               </li>
             </ul>
           </div>

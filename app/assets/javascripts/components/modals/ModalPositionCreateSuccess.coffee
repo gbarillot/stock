@@ -33,6 +33,7 @@ ModalPositionCreateSuccess = Vue.component('ModalPositionCreateSuccess',
       product_id: ''
       quantity: ''
       reference: ''
+
     location.href = $(lnk).attr('href')
-    return
+
 )

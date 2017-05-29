@@ -145,6 +145,7 @@ form {
   span.error {
     display: inline;
     color: red;
+    margin-left: 6px;
     &.hide {
       display: none;
     }

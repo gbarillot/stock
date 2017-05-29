@@ -13,9 +13,13 @@ class Position < ApplicationRecord
     else
       if q.first == '#'
         q.slice!(0)
-        out = Position.where("name LIKE (?)", "#{q}%")
+        out = Position.where("name LIKE (?)", "#{q}%").limit(20)
       else
-        out = Position.joins(:product).where("products.reference ILIKE (?)", "#{q}%")
+        if q == ''
+          out = []
+        else
+          out = Position.joins(:product).where("products.reference ILIKE (?)", "#{q}%").limit(20)
+        end
       end
     end
 
