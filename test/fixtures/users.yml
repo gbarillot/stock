@@ -1,2 +1,4 @@
 employee:
   email: "test@domain.com"
+  first_name: 'FIRST NAME'
+  last_name: 'last name'

@@ -1,4 +1,5 @@
-@ModalMove = Vue.component('ModalMove',
+@ModalMove = Vue.component 'ModalMove',
+
   template: '''
     <div aria-hidden='true' aria-labelledby='myModalLabel' class='modal' id='moveProduct' role='dialog' tabindex='-1'>
       <div class='modal-dialog' role='document'>
@@ -7,37 +8,27 @@
             <button aria-label='Close' class='close' data-dismiss='modal' type='button'>
               <span aria-hidden='true'>×</span>
             </button>
-            <h4 class='modal-title w-100' style='color: #000'>Modifier un emplacement</h4>
+            <h4 class='modal-title w-100 before' style='color: #000'>Déplacer</h4>
+            <h4 class='modal-title w-100 after' style='color: #000'>Confirmation</h4>
           </div>
 
           <div class='modal-body'>
-            <ul class='editor'>
-              <li>
-                <a href='#' v-on:click="openToggleForm"><span>+</span> Déplacer</a>
-                <form data-component="Products" v-on:submit="moveProduct" accept-charset="UTF-8" method="post">
-                  <div class='form-group'>
-                    <label>Nouvel emplacement<em>*</em></label>
-                    <input name="position[name]" type="text" value="" />
-                  </div>
-                  <div class='form-group' style='text-align: center'>
-                    <input type="submit" name="commit" value="Enregistrer" class="btn btn-primary" />
-                  </div>
-                </form>
-              </li>
-              <li class='separator'></li>
-              <li>
-                <a href='#' v-on:click="openToggleForm"><span>+</span> Sortir</a>
-                <form data-component="Products" v-on:submit="moveProduct" accept-charset="UTF-8" method="post">
-                  <div class='form-group'>
-                    <label>Réference de la commande<em>*</em></label>
-                    <input name="position[name]" type="text" value="" />
-                  </div>
-                  <div class='form-group' style='text-align: center'>
-                    <input type="submit" name="commit" value="Enregistrer" class="btn btn-primary" />
-                  </div>
-                </form>
-              </li>
-            </ul>
+            <form data-component="Products" v-on:submit="moveProduct" accept-charset="UTF-8" method="post">
+              <div class='form-group'>
+                <label>Quantité à déplacer</label>
+                <select class='form-control' v-on:change='setQuantity'>
+                  <option v-for="i in position.quantity" :value='i' >{{i}}</option>
+                </select>
+              </div>
+              <div class='form-group mt-20'>
+                <label>Nouvel emplacement<em>*</em></label>
+                <AutocompletePositions></AutocompletePositions>
+              </div>
+            </form>
+            <div class='success-msg'>
+              <p>{{position.quantity}} produits déplacés</p>
+              <strong><span>A 7 B 4</span> -> <span>B 7 3 5</span></strong>
+            </div>
           </div>
         </div>
       </div>
@@ -46,22 +37,16 @@
 
   data: ->
     store.state
+
+  mounted: ->
+    $('#moveProduct form').show()
+    $('#moveProduct .success-msg').hide()
+    $('#moveProduct h4.before').show()
+    $('#moveProduct h4.after').hide()
+
   methods:
-    openToggleForm: (e) ->
-      e.preventDefault()
-      lnk = $(e.target)
-      if lnk.find('span').text() == '+'
-        lnk.find('span').text '-'
-        lnk.parent().find('form').show()
-        lnk.parent().parent().find('li').hide()
-        lnk.parent().parent().find('li').css 'border-color: #fff'
-        lnk.parent().show()
-      else
-        lnk.find('span').text '+'
-        lnk.parent().find('form').hide()
-        lnk.parent().parent().find('li').show()
-      return
-    moveProduct: (e) ->
-      e.preventDefault()
-      false
-)
+    setQuantity: (e) ->
+      store.state.position.quantity = $(e.target).val()
+
+    moveProduct: ->
+      console.log 'here'

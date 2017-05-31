@@ -1,10 +1,10 @@
-@AutocompleteProduct = Vue.component('AutocompleteProduct',
+@AutocompleteProduct = Vue.component 'AutocompleteProduct',
+
   template: '''
     <div class='autocomplete'>
       <input type="text"
        v-model="q"
        v-on:keyup="search"
-
        class="form-control"
        placeholder="Saisir les premiers caractères..."
       />
@@ -17,25 +17,23 @@
     </div>'''
 
   data: ->
-    {
-      q: ''
-      products: []
-    }
+    q: ''
+    products: []
+
   methods:
     search: ->
       that = this
       delay (->
-        $.get('/products/autocomplete', q: that.q).done (data) ->
+        $.get('/autocomplete/products', q: that.q).done (data) ->
           that.products = data.products
           return
         return
       ), 300
       return
+
     pick: (e) ->
       el = $(e.currentTarget)
       @q = el.find('strong').text()
       @products = []
-      store.state.new_position.product_name = el.find('span').text()
-      store.state.new_position.product_id = el.find('i').text()
-      return
-)
+      store.state.position.product_name = el.find('span').text()
+      store.state.position.product_id = el.find('i').text()

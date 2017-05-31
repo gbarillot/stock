@@ -11,7 +11,6 @@
       </div>
       <ModalMenu></ModalMenu>
       <ModalMove></ModalMove>
-      <ModalOrders></ModalOrders>
     </div>''',
 
   data: ->

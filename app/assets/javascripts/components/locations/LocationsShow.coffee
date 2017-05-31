@@ -1,4 +1,4 @@
-@LocationsShow = Vue.component('LocationsShow',
+@LocationsShow = Vue.component 'LocationsShow',
   template: '''
     <div>
       <ul class=breadcrumb>
@@ -64,6 +64,3 @@
         ]
         that.positions = data.positions
         that.tree = data.tree
-        return
-    return
-)

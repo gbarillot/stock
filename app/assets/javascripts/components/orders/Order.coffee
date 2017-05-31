@@ -1,4 +1,4 @@
-@Order = Vue.component('Order',
+@Order = Vue.component 'Order',
 
   template: '''
     <div class="card">
@@ -22,13 +22,14 @@
     </div>
   '''
 
-  props: order:
-    type: Object
-    default: ->
-      {}
-  methods: toggleStateModal: (e, state, id) ->
-    store.state.current_order.state = state
-    store.state.current_order.id = id
-    $('#orderState').modal()
-    return
-)
+  props:
+    order:
+      type: Object
+      default: ->
+        {}
+
+  methods:
+    toggleStateModal: (e, state, id) ->
+      store.state.current_order.state = state
+      store.state.current_order.id = id
+      $('#orderState').modal()

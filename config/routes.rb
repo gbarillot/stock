@@ -3,19 +3,16 @@ Rails.application.routes.draw do
   root 'home#index'
   devise_for :users
 
-  get 'products/autocomplete', to: 'products#autocomplete'
+  get 'autocomplete/:topic', to: 'autocomplete#show'
+
   resources :products
-
-  get 'positions/autocomplete', to: 'positions#autocomplete'
-  get 'positions/available', to: 'positions#available'
   resources :positions
-
   resources :orders
   resources :users
 
-  get '/baskets/:order_id', to: 'baskets#show'
+  get  '/baskets/:order_id', to: 'baskets#show'
   post '/baskets/add', to: 'baskets#create'
   post '/baskets/remove', to: 'baskets#destroy'
 
-  get '/locations/:slug', to: 'locations#show'
+  get  '/locations/:slug', to: 'locations#show'
 end

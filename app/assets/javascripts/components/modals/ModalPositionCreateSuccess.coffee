@@ -1,4 +1,5 @@
-ModalPositionCreateSuccess = Vue.component('ModalPositionCreateSuccess',
+ModalPositionCreateSuccess = Vue.component 'ModalPositionCreateSuccess',
+
   template: '''
     <div aria-hidden='true' aria-labelledby='myModalLabel' class='modal' id='positionCreateSuccess' role='dialog' tabindex='-1'>
       <div class='modal-dialog' role='document'>
@@ -23,6 +24,7 @@ ModalPositionCreateSuccess = Vue.component('ModalPositionCreateSuccess',
 
   data: ->
     store.state
+
   methods: goToPage: (e) ->
     e.preventDefault()
     lnk = $(e.target)
@@ -35,5 +37,3 @@ ModalPositionCreateSuccess = Vue.component('ModalPositionCreateSuccess',
       reference: ''
 
     location.href = $(lnk).attr('href')
-
-)

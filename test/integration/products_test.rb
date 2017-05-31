@@ -11,6 +11,7 @@ feature "#show" do
     get "/products"
 
     response = jsonify(last_response.body)
+
     assert_equal 200, last_response.status
     assert_equal 2, response[:products].length
     assert_equal '123456', response[:products].first[:reference]

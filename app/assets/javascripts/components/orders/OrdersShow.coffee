@@ -1,4 +1,5 @@
-@OrdersShow = Vue.component('OrdersShow',
+@OrdersShow = Vue.component 'OrdersShow',
+
   template: '''
     <div>
       <ul class=breadcrumb>
@@ -19,6 +20,7 @@
 
   data: ->
     store.state
+
   mounted: ->
     that = this
     $.ajax
@@ -26,6 +28,3 @@
       type: 'get'
       success: (data) ->
         store.state.orders = data.orders
-        return
-    return
-)

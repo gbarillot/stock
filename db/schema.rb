@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170527161458) do
+ActiveRecord::Schema.define(version: 20170530194424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,10 @@ ActiveRecord::Schema.define(version: 20170527161458) do
     t.integer "quantity"
     t.integer "product_id"
     t.integer "free", default: 0
+    t.integer "volume", default: 0
+    t.integer "width", default: 0
+    t.integer "height", default: 0
+    t.integer "level", default: 0
     t.index ["free"], name: "index_positions_on_free"
     t.index ["name"], name: "index_positions_on_name"
     t.index ["product_id"], name: "index_positions_on_product_id"

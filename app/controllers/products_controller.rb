@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
 
   def index
-    @products = Product.all.order('updated_at DESC')
+    @products = Product.order('updated_at DESC')
 
     render json: {products: @products}.to_json
   end
@@ -10,15 +10,11 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
-  def autocomplete
-    @products = Product.autocomplete(params[:q])
-  end
-
   def update
     @product = Product.find(params[:id])
 
     if @product.update_attributes(product_params)
-      render json: {success: true}.to_json
+      render template: '/products/show'
     else
       render json: {success: false, errors: @product.errors.messages}.to_json, status: 422
     end
@@ -28,15 +24,7 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     if @product.save
-      render json: {
-        success: true,
-        product: {
-          name: @product.name,
-          reference: @product.reference,
-          quantity: @product.quantity,
-          position: @product.position
-        }
-      }.to_json
+      render template: '/products/show'
     else
       render json: {success: false, errors: @product.errors.messages}.to_json, status: 422
     end

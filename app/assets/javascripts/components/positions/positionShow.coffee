@@ -1,4 +1,5 @@
-@PositionShow = Vue.component('PositionShow',
+@PositionShow = Vue.component 'PositionShow',
+
   template: '''
     <div>
       <Nav></Nav>
@@ -14,12 +15,10 @@
 
   data: ->
     { positions: [] }
+
   mounted: ->
     $.ajax
       url: '/positions/' + @$route.params.id
       type: 'get'
       success: (data) ->
         store.state.positions = data.positions
-        return
-    return
-)

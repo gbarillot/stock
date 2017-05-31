@@ -29,7 +29,7 @@ Nav = Vue.component('Nav',
     search: ->
       that = this
       delay (->
-        $.get('/positions/autocomplete', q: that.q).done (data) ->
+        $.get('/autocomplete/positions', q: that.q).done (data) ->
           store.state.metrics = [
             data.metrics.positions
             data.metrics.count

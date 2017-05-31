@@ -1,4 +1,5 @@
-@OrdersIndex = Vue.component('OrdersIndex',
+@OrdersIndex = Vue.component 'OrdersIndex',
+
   template: '''
     <div>
       <ul class=breadcrumb>
@@ -13,10 +14,12 @@
         </div>
       </div>
       <ModalOrderState></ModalOrderState>
-    </div>'''
+    </div>
+  '''
 
   data: ->
     store.state
+
   mounted: ->
     that = this
     $.ajax
@@ -24,6 +27,3 @@
       type: 'get'
       success: (data) ->
         store.state.orders = data.orders
-        return
-    return
-)

@@ -1,4 +1,5 @@
-@OrdersContent = Vue.component('OrdersContent',
+@OrdersContent = Vue.component 'OrdersContent',
+
   template: '''
     <div>
       <ul class=breadcrumb>
@@ -29,6 +30,7 @@
                     </div>
                   </li>
                 </ul>
+
               </div>
             </div>
             <div class='col-xs-12 col-sm-12 col-md-6 col-lg-6 history'>
@@ -51,19 +53,18 @@
     </div>'''
 
   data: ->
-    {
-      q: ''
-      order_reference: ''
-      positions: []
-      basket: []
-    }
+    q: ''
+    order_reference: ''
+    positions: []
+    basket: []
+    
   mounted: ->
     that = this
     $.get('/baskets/' + that.$route.params.id).done (data) ->
       that.order_reference = data.metrics.order_reference
       that.basket = data.positions
       return
-    return
+ 
   methods:
     search: ->
       that = this
@@ -77,7 +78,7 @@
               return
         return
       ), 300
-      return
+
     addProduct: (e) ->
       that = this
       btn = $(e.target)
@@ -102,6 +103,7 @@
             i++
           return
       return
+
     removeProduct: (e) ->
       that = this
       btn = $(e.target)
@@ -118,6 +120,3 @@
           if position.id == qty.data('ref')
             that.basket.splice i, 1
           i++
-        return
-      return
-)

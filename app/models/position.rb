@@ -2,7 +2,7 @@ class Position < ApplicationRecord
 
   belongs_to :product, optional: true
 
-  validates_presence_of :name, :depth, :quantity
+  validates_presence_of :name, :level, :quantity
   validates :quantity, numericality: { only_integer: true }
   has_many :baskets
   has_many :orders, through: :baskets
@@ -18,7 +18,7 @@ class Position < ApplicationRecord
         if q == ''
           out = []
         else
-          out = Position.joins(:product).where("products.reference ILIKE (?)", "#{q}%").limit(20)
+          out = Position.joins(:product).where("products.reference ILIKE (?) AND products.id != 0", "#{q}%").limit(20)
         end
       end
     end
@@ -26,61 +26,38 @@ class Position < ApplicationRecord
     return out
   end
 
-  def self.link(params)
-    ActiveRecord::Base.transaction do
-      new_position = Position.new(params)
+  def self.get(name)
+    Position.where(['name = ? AND product_id IS NOT NULL', name]).last
+  end
 
+  def insert(params)
+    ActiveRecord::Base.transaction do
       prod = Product.find_by(id: params[:product_id])
       if !prod
-        new_position.errors.add(:product, 'must exist')
-        return new_position
+        errors.add(:product, 'must exist')
+        return self
       end
 
-      existing = Position.where(['name = ? AND quantity > 0', params[:name]]).last
-      if existing
-        if existing.product_id == params[:product_id].to_i
-          places = []
-          new_position.name.split(' ').each_with_index do |f, i|
-            places.push(f)
-            pos = Position.where(['name = ? AND depth = ?', places.join(' '), i]).last
-            if pos
-              pos.update_attributes(quantity: (pos.quantity.to_i + params[:quantity].to_i), free: (pos.free.to_i - params[:quantity].to_i))
-            else
-              existing.update_attributes(quantity: params[:quantity].to_i, free: (existing.free.to_i - params[:quantity].to_i))
-            end
-          end
-          History.create!(user_id: $current_user.id, item_type: "Position", item_id: existing.id, actions: {add: params[:quantity], product_id: params[:product_id].to_i})
-        else
-          new_position.errors.add(:name, 'Deja existant')
+      if free > params[:quantity].to_i
+        places = []
+        name.split(' ').each_with_index do |f, i|
+          places.push(f)
+          pos = Position.where(['name = ? AND level = ?', places.join(' '), i]).last
+          pos.update_attributes(pos.add_quantities(params))
         end
+
+        History.create!(user_id: $current_user.id, item_type: "Position", item_id: id, actions: {add: params[:quantity], product_id: params[:product_id].to_i})
       else
-        if new_position.valid?
-          places = []
-          position_depth = new_position.name.split(' ').length
-          new_position.name.split(' ').each_with_index do |f, i|
-            places.push(f)
-            pos = Position.where(['name = ? AND depth = ?', places.join(' '), i]).last
-            if pos
-              pos.update_attributes(quantity: pos.quantity.to_i + params[:quantity].to_i, free: (pos.free.to_i - params[:quantity].to_i))
-            else
-              if i == position_depth - 1
-                new_position = Position.create!(name: places.join(' '), depth: i, quantity: params[:quantity].to_i, product_id: params[:product_id].to_i)
-                History.create!(user_id: $current_user.id, item_type: "Position", item_id: new_position.id, actions: {add: params[:quantity], product_id: params[:product_id].to_i})
-              else
-                new_position = Position.create!(name: places.join(' '), depth: i, quantity: params[:quantity].to_i)
-              end
-            end
-          end
-        end
+        errors.add(:name, 'Pas de place')
       end
 
-      return new_position
+      return self.reload
     end
   end
 
-  def unlink(removed_quantity)
+  def pick(items)
     ActiveRecord::Base.transaction do
-      if removed_quantity > quantity
+      if items > quantity
         self.errors.add(:quantity, "can't be greater")
         return self
       end
@@ -88,14 +65,62 @@ class Position < ApplicationRecord
       places = []
       name.split(' ').each_with_index do |f, i|
         places.push(f)
-        pos = Position.where(['name = ? AND depth = ?', places.join(' '), i]).last
-        pos.update_attribute(:quantity, pos.quantity.to_i - removed_quantity.to_i)
+        pos = Position.where(['name = ? AND level = ?', places.join(' '), i]).last
+        pos.update_attributes(pos.remove_quantities(items.to_i))
       end
 
-      History.create!(user_id: $current_user.id, item_type: "Position", item_id: id, actions: {remove: removed_quantity, product_id: product_id})
+      History.create!(user_id: $current_user.id, item_type: "Position", item_id: id, actions: {remove: items, product_id: product_id})
 
-      self.reload
+      return self.reload
     end
   end
 
+  def move(params)
+    ActiveRecord::Base.transaction do
+      original_product_id = product_id
+      pick(params[:quantity])
+      Position.find(params[:to]).insert(
+        quantity: params[:quantity],
+        product_id: original_product_id
+      )
+
+      return self
+    end
+  end
+
+  def add_quantities(args)
+    out = {
+      quantity: (quantity.to_i + args[:quantity].to_i),
+      free: (free.to_i - args[:quantity].to_i),
+    }
+
+    out.update(product_id: args[:product_id]) if product_id
+
+    return out
+  end
+
+  def remove_quantities(qty)
+    out = {
+      quantity: (quantity.to_i - qty.to_i),
+      free: (free.to_i + qty.to_i),
+    }
+
+    out.update(product_id: 0) if (quantity.to_i - qty.to_i) <= 0
+
+    return out
+  end
+
+  def self.availabilities(params)
+    pos = Position.find(params[:id])
+    Position.where([
+      'free >= ?
+      AND product_id IS NOT NULL
+      AND positions.id != ?',
+      params[:quantity], pos.id
+    ]).limit(50)
+  end
+
+  def product
+    association(:product).load_target || NullProduct
+  end
 end

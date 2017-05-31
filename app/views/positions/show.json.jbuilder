@@ -2,7 +2,7 @@ total = 0
 json.position do
   json.id @position.id
   json.name @position.name
-  json.quantity @position.quantity
+  json.quantity @position.quantity.to_h
   total += @position.quantity
 
   json.product do

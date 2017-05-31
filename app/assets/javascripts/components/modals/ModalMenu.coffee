@@ -1,4 +1,4 @@
-@ModalMenu = Vue.component('ModalMenu',
+@ModalMenu = Vue.component 'ModalMenu',
   template: '''
     <div aria-hidden='true' aria-labelledby='myModalLabel' class='modal' id='showMenu' role='dialog' tabindex='-1'>
       <div class='modal-dialog' role='document'>
@@ -41,10 +41,9 @@
 
   data: ->
     store.state
+
   methods: goToPage: (e) ->
     e.preventDefault()
     lnk = $(e.target)
     $('#showMenu').modal 'hide'
     location.href = $(lnk).attr('href')
-    return
-)

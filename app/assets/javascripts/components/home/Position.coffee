@@ -1,4 +1,5 @@
-@Position = Vue.component('Position',
+@Position = Vue.component 'Position',
+
   template: '''
     <div class="card">
       <div class="card-block">
@@ -9,15 +10,21 @@
         </p>
         <hr />
         <p class="card-footer">
-          <strong style='float: right'><a class='btn btn-action' v-bind:href="'/#/locations/' + position.location">{{position.name}}</a></strong>
-          <a class='btn btn-action' data-toggle="modal" data-target="#moveProduct">{{position.quantity}}</a></button>
+          <strong style='float: right'><a class='btn btn-primary' v-bind:href="'/#/locations/' + position.location">{{position.name}}</a></strong>
+          <a class='btn btn-primary' v-on:click="toggleMoveModal(this, position.id, position.quantity)">{{position.quantity}}</a></button>
         </p>
       </div>
     </div>
   ''',
 
-  props: position:
-    type: Object
-    default: ->
-      {}
-)
+  props:
+    position:
+      type: Object
+      default: ->
+        {}
+
+  methods:
+    toggleMoveModal: (e, id, quantity) ->
+      store.state.position.id = id
+      store.state.position.quantity = quantity
+      $('#moveProduct').modal()

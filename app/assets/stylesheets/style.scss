@@ -2,10 +2,12 @@ svg {
   width: 100%;
   margin-left: 0px;
 }
-.btn-action {
-  background-color: #eee;
+.btn.btn-action {
+  background-color: #377ab7;
+  color: #fff !important;
   &:hover {
-    color: #377ab7 !important;
+    background-color: #63a8e8 !important;
+    //color: #377ab7 !important;
   }
 }
 .input-error {
@@ -188,7 +190,9 @@ form {
 ul.editor {
   form {
     margin-top: 20px;
-    display: none;
+    input[type='submit'] {
+      display: none;
+    }
   }
 }
 ul.editor li {
@@ -290,4 +294,33 @@ a.availability {
 }
 .modal-footer a.btn {
   margin-bottom: 0px;
+}
+#moveProduct {
+  form {
+    input[type='submit'] {
+      display: none;
+    }
+  }
+  .modal-body {
+    padding-bottom: 40px;
+  }
+  .success-msg {
+    display: none;
+    text-align: center;
+    padding: 20px 0;
+    strong span {
+      padding: 40px;
+    }
+  }
+  .autocomplete-positions ul {
+    padding-left: 9px;
+    padding-bottom: 20px;
+    li {
+      width: 106px;
+      float: left;
+      border: 1px solid #ddd;
+      margin: 5px;
+      text-align: center;
+    }
+  }
 }
