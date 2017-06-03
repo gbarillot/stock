@@ -40,10 +40,9 @@
   '''
 
   data: ->
-    {
-      user: {}
-      errors: {}
-    }
+    user: {}
+    errors: {}
+
   mounted: ->
     that = this
     $.ajax

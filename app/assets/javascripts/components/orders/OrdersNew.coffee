@@ -1,4 +1,4 @@
-@OrdersNew = Vue.component('OrdersNew',
+@OrdersNew = Vue.component 'OrdersNew',
   template: '''
     <div>
       <ul class=breadcrumb>
@@ -22,7 +22,6 @@
                 <div class='form-group'>
                   <label>Assigner à<em>*</em></label>
                   <select v-model="order.user_id" name='user_id' class='form-control'>
-                    <option>Selectionner dans la liste...</option>
                     <option v-for='user in users' :value="user.id">{{user.first_name}} {{user.last_name}}</option>
                   </select>
                 </div>
@@ -93,14 +92,13 @@
   '''
 
   data: ->
-    {
-      users: []
-      order:
-        user_id: currentUser.id
-        due_hour: 0
-        due_minutes: 0
-        due_date: ''
-    }
+    users: []
+    order:
+      user_id: currentUser.id
+      due_hour: 0
+      due_minutes: 0
+      due_date: ''
+
   mounted: ->
     that = this
     $.ajax
@@ -108,19 +106,19 @@
       type: 'get'
       success: (data) ->
         that.users = data
-        return
+
     $('.pick-date div').datepicker(format: 'yyyy-mm-dd').on 'changeDate', ->
       that.order.due_date = $(this).datepicker('getFormattedDate')
-      return
-    return
-  methods: createOrder: (e) ->
-    e.preventDefault()
-    that = this
-    $.post('/orders', order: that.order).always((data) ->
-      $('.btn-primary.btn.pull-right').prop 'disabled', false
-      return
-    ).done (data) ->
-      window.location = '/#/orders/' + data.id
-      return
-    return
-)
+
+  methods:
+    createOrder: (e) ->
+      e.preventDefault()
+      that = this
+      $.ajax
+        url: '/orders'
+        type: 'post'
+        data:
+          order: that.order
+        success: (data) ->
+          $('.btn-primary.btn.pull-right').prop 'disabled', false
+          window.location = '/#/orders/' + data.id + '/edit'

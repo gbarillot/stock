@@ -17,4 +17,25 @@ class Order < ApplicationRecord
     user.orders.where(['state = ?', 'busy'])
   end
 
+  def countdown_refs
+    out = 0
+    f = baskets.where('picked = true').count.to_f
+    i = baskets.count.to_f
+
+    if i > 0.0
+      out = (((f / i )*100.0).to_i).round(-1)
+    end
+  end
+
+  def countdown_time
+    out = 0
+    f = due_at.to_i.to_f - created_at.to_i.to_f
+    i = due_at.to_i.to_f - Time.now.to_i.to_f
+
+    puts f
+    puts i
+
+    out = (100 - ((i / f) *100.0).to_i).round(-1)
+  end
+
 end

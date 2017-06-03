@@ -10,7 +10,7 @@
         </p>
         <hr />
         <p class="card-footer">
-          <strong style='float: right'><a class='btn btn-primary' v-bind:href="'/#/locations/' + position.location">{{position.name}}</a></strong>
+          <strong style='float: right'><a class='btn btn-primary' v-bind:href="'/#/positions/' + position.location">{{position.name}}</a></strong>
           <a class='btn btn-primary' v-on:click="toggleMoveModal(this, position.id, position.quantity)">{{position.quantity}}</a></button>
         </p>
       </div>

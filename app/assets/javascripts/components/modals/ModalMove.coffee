@@ -30,6 +30,7 @@
               <strong><span>A 7 B 4</span> -> <span>B 7 3 5</span></strong>
             </div>
           </div>
+
         </div>
       </div>
     </div>
@@ -39,6 +40,8 @@
     store.state
 
   mounted: ->
+    console.log
+    this.quantity = 6
     $('#moveProduct form').show()
     $('#moveProduct .success-msg').hide()
     $('#moveProduct h4.before').show()
@@ -46,7 +49,8 @@
 
   methods:
     setQuantity: (e) ->
-      store.state.position.quantity = $(e.target).val()
+      #console.log $(e.target).val()
+      store.state.quantity_to_move = $(e.target).val()
 
     moveProduct: ->
       console.log 'here'

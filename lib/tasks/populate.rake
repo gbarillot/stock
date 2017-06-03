@@ -4,11 +4,21 @@ task populate: :environment do
   require 'barby/barcode/code_128'
   require 'barby/outputter/svg_outputter'
 
+  User.destroy_all
   Product.destroy_all
   Order.destroy_all
   Position.destroy_all
   Basket.destroy_all
   History.destroy_all
+
+  puts "Users"
+  User.Create!(
+    email: 'guillaume@demo.com',
+    first_name: 'Guillaume',
+    last_name: 'Barillot',
+    password: '04mars1974',
+    password_confirmation: '04mars1974'
+  )
 
   puts 'Products----------------'
 
@@ -33,18 +43,17 @@ task populate: :environment do
   sampled = []
   ['A', 'B', 'C', 'D'].each do |allee|
     parent = allee
-    Position.create!(name: "#{parent}", depth: 0, quantity: 0, product_id: nil, free: 3200)
+    Position.create!(name: "#{parent}", level: 0, quantity: 0, product_id: nil, free: 3200)
 
     (1..16).each do |rak|
-      Position.create!(name: "#{parent} #{rak}", depth: 1, quantity: 0, product_id: nil, free: 800)
+      Position.create!(name: "#{parent} #{rak}", level: 1, quantity: 0, product_id: nil, free: 800)
 
       (1..4).each do |etage|
-        Position.create!(name: "#{parent} #{rak} #{etage}", depth: 1, quantity: 0, product_id: nil, free: 200)
+        Position.create!(name: "#{parent} #{rak} #{etage}", level: 2, quantity: 0, product_id: nil, free: 200)
 
         (1..20).each do |pos|
-          sampled.push("#{parent} #{rak} #{etage} #{pos}")
-
-          Position.create!(name: "#{parent} #{rak} #{etage} #{pos}", depth: 1, quantity: 0, product_id: empty_p.id, free: 10)
+          new_pos = Position.create!(name: "#{parent} #{rak} #{etage} #{pos}", level: 3, quantity: 0, product_id: 0, free: 10)
+          sampled.push(new_pos.id)
         end
       end
     end
@@ -55,11 +64,12 @@ task populate: :environment do
   to = Product.last.id
   $current_user = User.first
 
-  300.times do |i|
+  2000.times do |i|
     p = rand(from..to)
     q = rand(1..10)
-    name = sampled.sample
-    Position.link(product_id: p, quantity: q, name: name)
+    id = sampled.sample
+    pos = Position.find(id)
+    pos.insert(product_id: p, quantity: q)
   end
 
 end

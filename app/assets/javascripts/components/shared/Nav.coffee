@@ -1,6 +1,10 @@
 Nav = Vue.component('Nav',
   template: '''
     <nav class="navbar navbar-light bg-primary">
+      <div class='action-buttons'>
+        <a type="button" class="btn-floating btn-large btn-menu" data-toggle="modal" data-target="#showMenu"><i class='fa fa-bars'></i></a>
+        <a href="/#/orders/me" type="button" class="btn-floating btn-large btn-orders">{{metrics[2]}}</a>
+      </div>
       <div class='action-form'>
         <form class="form-inline pull-xs-right autocomplete">
             <input
@@ -13,12 +17,9 @@ Nav = Vue.component('Nav',
              placeholder="Réf, #emplacement, @commande"
             />
         </form>
-        <span class="metrics">{{metrics[0]}}/{{metrics[1]}}</span>
       </div>
-      <div class='action-buttons'>
+      <div class='metrics'>
         <span class="metrics">{{metrics[0]}}/{{metrics[1]}}</span>
-        <a type="button" class="btn-floating btn-large btn-menu" data-toggle="modal" data-target="#showMenu"><i class='fa fa-bars'></i></a>
-        <a href="/#/orders/me" type="button" class="btn-floating btn-large btn-orders">{{metrics[2]}}</a>
       </div>
     </nav>
   '''

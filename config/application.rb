@@ -10,6 +10,7 @@ module Cedric
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
+    config.time_zone = 'Paris'
 
     config.i18n.available_locales = [:fr]
     config.i18n.default_locale = :fr

@@ -27,7 +27,7 @@
       that = this
       delay (->
         $.ajax
-          url: '/autocomplete/availabilities'
+          url: '/autocomplete/move'
           type: 'get'
           data:
             q:
@@ -44,11 +44,10 @@
         url: "/positions/#{store.state.position.id}"
         type: 'put'
         data:
-          quantity: store.state.position.quantity
+          quantity: store.state.quantity_to_move
           destination: el.find('[data-destination]').data('destination')
         success: (data) ->
           $('#moveProduct form').hide()
           $('#moveProduct .success-msg').show()
           $('#moveProduct h4.before').hide()
           $('#moveProduct h4.after').show()
-          #that.positions = data

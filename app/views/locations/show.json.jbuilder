@@ -1,20 +1,21 @@
-json.positions @positions.each do |position|
-  json.id position.id
-  json.name position.name
-  json.quantity position.quantity
-  json.location position.name.parameterize
+json.locations @locations.each do |location|
+  json.id location.id
+  json.name location.name.split(' ').last
+  json.quantity location.quantity
+  json.slug location.name.parameterize
+  json.level location.level
+  json.kind location.product_id ? 'position' : 'node'
 
-  json.product do
-    json.id position.product.id
-    json.name position.product.name.truncate(25)
-    json.reference position.product.reference
-    json.ean13 position.product.ean13
+  if location.level == 0
+    json.type "Allée"
+  elsif location.level == 1
+    json.type "Rack"
+  elsif location.level == 2
+    json.type "Etage"
+  elsif location.level == 3
+    json.type "Emplacement"
   end
 end
 
-json.tree full_tree(params[:slug])
-
-json.metrics do
-  json.positions @items.count
-  json.count @count
-end
+json.level @level
+json.tree locations_tree(params[:slug])

@@ -10,4 +10,7 @@ json.orders @orders.each do |order|
   json.klass order.state_klass
   json.count order.baskets.sum('quantity')
   json.references order.baskets.count
+  json.done order.baskets.where('picked = true').count
+  json.countdown_time order.countdown_time
+  json.countdown_refs order.countdown_refs
 end

@@ -57,8 +57,8 @@ ul.breadcrumb {
     }
   }
   a.btn-orders {
-    background-color: rgba(0, 128, 0, 0.7) !important;
-    line-height: 56px;
+    background-color: rgba(69, 255, 152, 0.7) !important;
+    line-height: 50px;
     text-align: center;
     display: block;
     font-size: 20px;
@@ -89,10 +89,23 @@ ul.breadcrumb {
     margin-left: 20px;
     color: #ddd;
   }
+
+  span.metrics {
+    float: right;
+    margin-right: 20px;
+    height: 26px;
+    @media (max-width: 768px) {
+      position: absolute;
+      top: 9px;
+      right: 20px;
+      margin-right: 0;
+    }
+  }
+
   .action-form {
     width: 70%;
     float: left;
-    @media (max-width: 992px) {
+    @media (max-width: 768px) {
       width: 100% !important;
       float: none;
     }
@@ -110,33 +123,30 @@ ul.breadcrumb {
         width: 100% !important;
       }
     }
-    span.metrics {
-      @media (max-width: 992px) {
-        display: none;
-      }
-    }
   }
   .action-buttons {
-    width: 170px;
-    float: right;
-    @media (max-width: 992px) {
-      width: 100%;
-      float: right;
-    }
-    span.metrics {
-      display: none;
-      @media (max-width: 992px) {
-        display: block;
-        float: left;
-        padding-top: 20px;
+    width: 140px;
+    float: left;
+    .btn-floating {
+      width: 40px;
+      height: 40px;
+      padding-top: 0px !important;
+      line-height: 42px !important;
+      i {
+        font-size: 20px !important;
+        line-height: 42px !important;
       }
     }
+    // @media (max-width: 992px) {
+    //   width: 100%;
+    //   float: right;
+    // }
     a {
-      float: right;
-      @media (max-width: 992px) {
-        display: block;
-        float: right;
-      }
+      float: left;
+      // @media (max-width: 992px) {
+      //   display: block;
+      //   float: right;
+      // }
     }
   }
 }
@@ -192,6 +202,12 @@ ul.editor {
     margin-top: 20px;
     input[type='submit'] {
       display: none;
+    }
+  }
+  form.hidden-forms {
+    display: none;
+    input[type='submit'] {
+      display: block;
     }
   }
 }
@@ -321,6 +337,136 @@ a.availability {
       border: 1px solid #ddd;
       margin: 5px;
       text-align: center;
+    }
+  }
+}
+.stats {
+  h3 {
+    width: 100%;
+    text-align: center;
+  }
+  .figure {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+}
+.load {
+  border: 1px solid #ddd;
+  width: 100%;
+  height: 30px;
+  margin-bottom: 10px;
+  padding-top: 0;
+  position: relative;
+  i {
+    position: absolute;
+    width: 25px;
+    height: 28px;
+    background-color: #fff;
+    line-height: 26px;
+    padding-left: 5px;
+  }
+  span {
+    em {
+      padding-left: 6px;
+      position: absolute;
+    }
+    display: inline-block;
+    background-color: red;
+    margin: 0;
+    width: 100%;
+    height: 28px;
+    padding-left: 25px;
+    line-height: 28px;
+    margin-bottom: 10px;
+    &.w-0 {
+      background-color: red;
+      width: 0%;
+    }
+    &.w-10 {
+      background-color: red;
+      width: 10%;
+    }
+    &.w-20 {
+      background-color: red;
+      width: 20%;
+    }
+    &.w-30 {
+      background-color: orange;
+      width: 30%;
+    }
+    &.w-40 {
+      background-color: orange;
+      width: 40%;
+    }
+    &.w-50 {
+      background-color: orange;
+      width: 50%;
+    }
+    &.w-60 {
+      background-color: orange;
+      width: 60%;
+    }
+    &.w-70 {
+      background-color: orange;
+      width: 70%;
+    }
+    &.w-80 {
+      background-color: green;
+      width: 80%;
+    }
+    &.w-90 {
+      background-color: green;
+      width: 90%;
+    }
+    &.w-100 {
+      background-color: green;
+      width: 100%;
+    }
+    &.time {
+      &.w-0 {
+        background-color: green;
+        width: 0%;
+      }
+      &.w-10 {
+        background-color: green;
+        width: 10%;
+      }
+      &.w-20 {
+        background-color: green;
+        width: 20%;
+      }
+      &.w-30 {
+        background-color: orange;
+        width: 30%;
+      }
+      &.w-40 {
+        background-color: orange;
+        width: 40%;
+      }
+      &.w-50 {
+        background-color: orange;
+        width: 50%;
+      }
+      &.w-60 {
+        background-color: orange;
+        width: 60%;
+      }
+      &.w-70 {
+        background-color: orange;
+        width: 70%;
+      }
+      &.w-80 {
+        background-color: red;
+        width: 80%;
+      }
+      &.w-90 {
+        background-color: red;
+        width: 90%;
+      }
+      &.w-100 {
+        background-color: red;
+        width: 100%;
+      }
     }
   }
 }

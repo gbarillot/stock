@@ -1,4 +1,5 @@
-@HomeIndex = Vue.component('HomeIndex',
+@HomeIndex = Vue.component 'HomeIndex',
+
   template: '''
     <div>
       <Nav></Nav>
@@ -15,6 +16,7 @@
 
   data: ->
     store.state
+    
   mounted: ->
     $.ajax
       url: '/positions'
@@ -26,6 +28,3 @@
           data.metrics.orders_count
         ]
         store.state.positions = data.positions
-        return
-    return
-)

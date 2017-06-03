@@ -101,3 +101,7 @@ fr:
               too_short: "Minimum 6 caractères"
             password_confirmation:
               confirmation: "Les mots de passe ne correspondent pas"
+        position:
+          attributes:
+            name:
+              taken: "Cet emplacement existe déjà"

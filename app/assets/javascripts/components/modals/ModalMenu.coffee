@@ -14,25 +14,34 @@
 
             <ul class='editor'>
               <li>
-                <a href='/#/orders/me' v-on:click="goToPage"><span>+</span> Mes commandes</a>
+                <a href='/#/orders/me' v-on:click="goToPage">Mes commandes</a>
               </li>
               <li class='separator'></li>
               <li>
-                <a href='/#/orders' v-on:click="goToPage"><span>+</span> Toutes les commandes</a>
+                <a href='/#/orders' v-on:click="goToPage">Toutes les commandes</a>
               </li>
               <li class='separator'></li>
               <li>
-                <a href='/#/orders/new' v-on:click="goToPage"><span>+</span> Nouvelle commande</a>
+                <a href='/#/orders/new' v-on:click="goToPage">Nouvelle commande</a>
               </li>
               <li class='separator'></li>
               <li>
-                <a href='/#/positions/new' v-on:click="goToPage"><span>+</span> Rentrer des produits</a>
+                <a href='/#/positions/new' v-on:click="goToPage">Rentrer des produits</a>
               </li>
               <li class='separator'></li>
               <li>
-                <a href='/#/users' v-on:click="goToPage"><span>+</span> Mon compte</a>
+                <a href='/#/locations/*' v-on:click="goToPage">Emplacements</a>
+              </li>
+              <li class='separator'></li>
+              <li>
+                <a href='/#/stats' v-on:click="goToPage">Statistiques</a>
+              </li>
+              <li class='separator'></li>
+              <li>
+                <a href='/#/users' v-on:click="goToPage">Mon compte</a>
               </li>
             </ul>
+
           </div>
         </div>
       </div>

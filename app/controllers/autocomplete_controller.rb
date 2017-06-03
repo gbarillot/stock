@@ -30,4 +30,11 @@ class AutocompleteController < ApplicationController
     @template = 'positions'
   end
 
+  def move
+    @positions = Position.autocomplete_move(params[:q])
+    @items = @positions
+    @count = @positions.sum('quantity')
+
+    @template = 'positions'
+  end
 end

@@ -1,4 +1,5 @@
 @PositionsNew = Vue.component 'PositionsNew',
+
   template: '''
   <div>
     <ul class=breadcrumb>
