@@ -11,8 +11,8 @@ task populate: :environment do
   Basket.destroy_all
   History.destroy_all
 
-  puts "Users"
-  User.Create!(
+  puts "Users--------------"
+  User.create!(
     email: 'guillaume@demo.com',
     first_name: 'Guillaume',
     last_name: 'Barillot',
