@@ -68,6 +68,10 @@
       else
         store.state.availabilities = []
 
+  mounted: ->
+    store.state.availabilities = []
+    store.position = {}
+    
   methods:
     saveQuantity: (e) ->
       store.state.position.quantity = $(e.target).val()

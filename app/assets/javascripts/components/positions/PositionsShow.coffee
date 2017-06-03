@@ -17,14 +17,10 @@
     </div>''',
 
   data: ->
-    {
-      metrics: [
-        0
-        0
-      ]
-      positions: []
-      tree: ''
-    }
+    metrics: [0, 0]
+    positions: []
+    tree: ''
+
   mounted: ->
     that = this
     $.ajax
