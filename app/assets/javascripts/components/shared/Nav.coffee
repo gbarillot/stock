@@ -1,4 +1,4 @@
-Nav = Vue.component('Nav',
+Nav = Vue.component 'Nav',
   template: '''
     <nav class="navbar navbar-light bg-primary">
       <div class='action-buttons'>
@@ -14,9 +14,12 @@ Nav = Vue.component('Nav',
 
              class="form-control col-md-12 col-xs-12"
              type="text"
-             placeholder="Réf, #emplacement, @commande"
+             placeholder="Référence ou #emplacement"
             />
+            <a href='#' class='barcode-scan' v-on:click="startScan()"><i class='fa fa-qrcode'></i></a>
+
         </form>
+
       </div>
       <div class='metrics'>
         <span class="metrics">{{metrics[0]}}/{{metrics[1]}}</span>
@@ -26,22 +29,48 @@ Nav = Vue.component('Nav',
 
   data: ->
     store.state
+
   methods:
     search: ->
       that = this
       delay (->
-        $.get('/autocomplete/positions', q: that.q).done (data) ->
-          store.state.metrics = [
-            data.metrics.positions
-            data.metrics.count
-            data.metrics.orders_count
-          ]
-          store.state.positions = data.positions
-          return
-        return
+        $.ajax
+          url: '/autocomplete/positions'
+          type: 'get'
+          data:
+            q: that.q
+          success: (data) ->
+            store.state.metrics = [
+              data.metrics.positions
+              data.metrics.count
+              data.metrics.orders_count
+            ]
+            store.state.positions = data.positions
       ), 300
-      return
+
     redirect: ->
       window.location.href = '/#/'
-      return
-)
+
+    startScan: ->
+      $('.modal-body.scanner').removeClass('done')
+      $(".modal-body .result").hide()
+      $("#modalScanner").modal()
+      Qrcode.read().then (out) ->
+        $('.modal-body.scanner').addClass('done')
+        $(".modal-body .status-#{out.status}").show()
+        delay (->
+          $("#modalScanner").modal('hide')
+        ), 1000
+        if out.status == 0
+          $.ajax
+            url: '/autocomplete/positions'
+            type: 'get'
+            data:
+              q: out.content
+            success: (data) ->
+              store.state.metrics = [
+                data.metrics.positions
+                data.metrics.count
+                data.metrics.orders_count
+              ]
+              store.state.positions = data.positions

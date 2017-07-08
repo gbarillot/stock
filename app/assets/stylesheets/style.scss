@@ -49,6 +49,9 @@ ul.breadcrumb {
   }
 }
 .navbar {
+  @media (max-width: 768px) {
+    height: 120px;
+  }
   a.btn-menu {
     background-color: rgba(50, 50, 50, 0.7) !important;
     i {
@@ -108,21 +111,38 @@ ul.breadcrumb {
     @media (max-width: 768px) {
       width: 100% !important;
       float: none;
+      height: 20px;
     }
     form {
       padding-top: 0px;
       padding-left: 10px;
+      height: 30px;
       width: 70%;
+      position: relative;
       @media (max-width: 992px) {
         width: 98% !important;
-        float: none;
+        float: left !important;
       }
       input {
         border-color: #ccc;
         color: #fff;
         width: 100% !important;
       }
+      a.barcode-scan {
+        background-color: #fff;
+        text-align: center;
+        border-radius: 50%;
+        display: block;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        color: #000;
+        position: absolute;
+        top: 7px;
+        right: 0;
+      }
     }
+
   }
   .action-buttons {
     width: 140px;
@@ -466,6 +486,33 @@ a.availability {
       &.w-100 {
         background-color: red;
         width: 100%;
+      }
+    }
+  }
+}
+.modal-body.scanner {
+  text-align: center;
+  video {
+    width: 300px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin: auto !important;
+    text-align: center;
+  }
+  .result {
+    display: none;
+  }
+  &.done {
+    video {
+      display: none;
+    }
+    i {
+      font-size: 60px;
+      &.fa-times {
+        color: red;
+      }
+      &.fa-check {
+        color: green;
       }
     }
   }

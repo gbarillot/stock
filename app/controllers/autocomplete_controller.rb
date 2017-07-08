@@ -18,13 +18,11 @@ class AutocompleteController < ApplicationController
 
   def positions
     @positions = Position.autocomplete(params[:q])
-    @items = @positions
     @count = @positions.sum('quantity')
   end
 
   def availabilities
     @positions = Position.availabilities(params[:q])
-    @items = @positions
     @count = @positions.sum('quantity')
 
     @template = 'positions'
@@ -32,7 +30,6 @@ class AutocompleteController < ApplicationController
 
   def move
     @positions = Position.autocomplete_move(params[:q])
-    @items = @positions
     @count = @positions.sum('quantity')
 
     @template = 'positions'

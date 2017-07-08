@@ -35,6 +35,10 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery"
+    }),
     new webpack.EnvironmentPlugin(JSON.parse(JSON.stringify(env))),
     new ExtractTextPlugin(env.NODE_ENV === 'production' ? '[name]-[hash].css' : '[name].css'),
     new ManifestPlugin({ fileName: paths.manifest, publicPath, writeToFileEmit: true })
@@ -42,6 +46,9 @@ module.exports = {
 
   resolve: {
     extensions: paths.extensions,
+    alias: {
+      'vue': 'vue/dist/vue.common.js',
+    },
     modules: [
       resolve(paths.source),
       resolve(paths.node_modules)

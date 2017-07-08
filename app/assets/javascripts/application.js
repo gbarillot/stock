@@ -11,14 +11,4 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require_tree ./vendor
-//= require helpers
-//= require_tree ./components
-//= require store
-//= require setup
-//= require routes
 
-const app = new Vue({
-  store: store,
-  router: router
-}).$mount('#app')

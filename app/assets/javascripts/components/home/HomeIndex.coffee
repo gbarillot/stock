@@ -12,11 +12,12 @@
       </div>
       <ModalMenu></ModalMenu>
       <ModalMove></ModalMove>
+      <ModalScanner></ModalScanner>
     </div>''',
 
   data: ->
     store.state
-    
+
   mounted: ->
     $.ajax
       url: '/positions'
