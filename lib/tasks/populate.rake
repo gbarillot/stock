@@ -13,11 +13,11 @@ task populate: :environment do
 
   puts "Users--------------"
   User.create!(
-    email: 'guillaume@demo.com',
-    first_name: 'Guillaume',
-    last_name: 'Barillot',
-    password: '04mars1974',
-    password_confirmation: '04mars1974'
+    email: 'admin@demo.com',
+    first_name: 'John',
+    last_name: 'Doe',
+    password: 'password',
+    password_confirmation: 'password'
   )
 
   puts 'Products----------------'

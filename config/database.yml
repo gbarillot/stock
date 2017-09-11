@@ -5,7 +5,7 @@ default: &default
 
 development:
   <<: *default
-  database: cedric_development
+  database: stock_development
   password: 04mars1974
   user: postgres
 
@@ -14,7 +14,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: cedric_test
+  database: stock_test
   password: 04mars1974
   user: postgres
 
