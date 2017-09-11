@@ -9,19 +9,29 @@
         <hr />
         <p class="card-footer">
           <strong style='float: right'><a class='btn btn-primary' v-bind:href="'/#/positions/' + position.location">{{position.name}}</a></strong>
-          <a class='btn btn-primary' v-on:click="toggleMoveModal(this, position.id, position.quantity)">{{position.quantity}}</a></button>
+          <a class='btn btn-primary' @click="toggleMoveModal(this, position.id, position.quantity)">{{position.quantity}}</a></button>
         </p>
       </div>
     </div>
 </template>
 
-<script lang='coffee'>
+<script>
 
-export default
-  props:
-    position:
-      type: Object
-      default: ->
+export default {
+  props: {
+    position: {
+      type: Object,
+      default: function() {
         {}
+      }
+    }
+  },
 
+  methods: {
+    toggleMoveModal: function(obj, id, qty) {
+      window.$('#moveProduct').modal();
+    }
+  }
+
+}
 </script>

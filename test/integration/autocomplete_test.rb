@@ -3,12 +3,11 @@ require "test_helper"
 feature "#autocomplete" do
 
   before do
-    @user = users(:employee)
-    login_as @user
+    login_as users(:employee)
 
-    @path = Position.create!(name: 'a', level: 0, quantity: 8, product_id: nil, free: 10)
-    @rack = Position.create!(name: 'a 1', level: 1, quantity: 6, product_id: nil, free: 8)
-    @floor = Position.create!(name: 'a 1 23', level: 2, quantity: 4, product_id: nil, free: 6)
+    Position.create!(name: 'a', level: 0, quantity: 8, product_id: nil, free: 10)
+    Position.create!(name: 'a 1', level: 1, quantity: 6, product_id: nil, free: 8)
+    Position.create!(name: 'a 1 23', level: 2, quantity: 4, product_id: nil, free: 6)
     @position = Position.create!(name: 'a 1 23 4', level: 3, quantity: 2, product_id: 0, free: 5)
     @position.insert(product_id: products(:product_1).id, quantity: 2)
   end

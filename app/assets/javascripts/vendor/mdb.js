@@ -9,8 +9,6 @@
  *
  *
  */
-
-
 /*
 chart.js
 scrolling-nav.js
@@ -24,8 +22,9 @@ forms-basic.js
 velocity.js
 buttons.js
 waves-effect.js
+*/
 
-*//*!
+/*!
  * Chart.js
  * http://chartjs.org/
  * Version: 1.0.2

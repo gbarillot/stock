@@ -1,5 +1,4 @@
 fr:
-  hello: "Hello world"
   time:
     formats:
       default: "%d %b %Y %H:%M"
@@ -91,6 +90,16 @@ fr:
         record_invalid: "Valeur invalide"
 
       models:
+        order:
+          attributes:
+            user:
+              required: "Merci d'affecter la commande à un employé"
+            created_by:
+              blank: "Saisie requise"
+            due_at:
+              blank: "Merci de selectionner date et heure d'écheance"
+            reference:
+              blank: "Merci de saisir la référence de la commande"
         user:
           attributes:
             first_name:

@@ -4,8 +4,6 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all.select(:id, :first_name, :last_name)
-
-    render json: @users.to_json
   end
 
   def show

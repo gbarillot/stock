@@ -1,7 +1,8 @@
 class Product < ApplicationRecord
 
-  has_many :positions
   validates_presence_of :reference, :quantity
+
+  has_many :positions
 
   def self.autocomplete(q)
     if q.blank?

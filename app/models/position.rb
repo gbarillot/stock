@@ -1,11 +1,12 @@
 class Position < ApplicationRecord
 
-  belongs_to :product, optional: true
-
   validates_presence_of :name, :level
   validates :name, uniqueness: true
+
   has_many :baskets
   has_many :orders, through: :baskets
+
+  belongs_to :product, optional: true
 
   def self.autocomplete(q)
     if q.blank?
@@ -101,7 +102,7 @@ class Position < ApplicationRecord
     }
 
     out.update(product_id: args[:product_id]) if args.has_key?(:product_id)
-    
+
     return out
   end
 
@@ -116,13 +117,15 @@ class Position < ApplicationRecord
     return out
   end
 
-  def self.availabilities(params)
-    Position.where([
+  def self.availabilities(id)
+    out = Position.where([
       'product_id IS NOT NULL
        AND (product_id = ? OR product_id = 0)
-      ',
-      params[:id]
+      ', id
     ]).limit(50)
+    out = [] if out.nil?
+    
+    return out
   end
 
   def self.autocomplete_move(params)

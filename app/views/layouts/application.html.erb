@@ -4,9 +4,7 @@
     <title>Labofill</title>
     <meta name="description" content="Gestion d'un stock FTW">
     <%= csrf_meta_tags %>
-    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.3/vue.js"></script-->
-    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/2.5.3/vue-router.js"></script-->
-    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/vuex/2.3.1/vuex.js"></script-->
+
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' name='viewport'>
     <%= stylesheet_link_tag 'application', media: 'all' %>
   </head>
@@ -17,7 +15,14 @@
         id: <%= @current_user.id %>,
         first_name: "<%= @current_user.first_name %>",
         last_name: "<%= @current_user.last_name %>"
-      }
+      };
+      const messages = {
+        en: {
+          message: {
+            hello: 'hello world'
+          }
+        }
+      };
     </script>
 
     <div id='app'>

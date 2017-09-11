@@ -1,9 +1,11 @@
 class Order < ApplicationRecord
 
-  belongs_to :user
+  validates_presence_of :reference, :due_at
 
   has_many :baskets
   has_many :positions, through: :baskets
+
+  belongs_to :user
 
   def state_klass
     out = "btn-warning"
@@ -14,7 +16,7 @@ class Order < ApplicationRecord
   end
 
   def self.waiting_for(user)
-    user.orders.where(['state = ?', 'busy'])
+    user.orders
   end
 
   def countdown_refs
@@ -31,9 +33,6 @@ class Order < ApplicationRecord
     out = 0
     f = due_at.to_i.to_f - created_at.to_i.to_f
     i = due_at.to_i.to_f - Time.now.to_i.to_f
-
-    puts f
-    puts i
 
     out = (100 - ((i / f) *100.0).to_i).round(-1)
   end

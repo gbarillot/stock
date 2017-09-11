@@ -15,6 +15,7 @@ json.items @basket.each do |item|
     json.name item.position.product.name
     json.reference item.position.product.reference
   end
+
 end
 
 json.metrics do
